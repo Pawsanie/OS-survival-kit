@@ -108,7 +108,7 @@ function Remove-Directory {
             -Force `
             -ErrorAction Stop `
             -Confirm:$false
-            
+
             Write-Host `
                 "Directory deletion successful.`n" `
                 "Directory path: '$Directory'" `
