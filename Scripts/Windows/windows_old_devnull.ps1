@@ -30,33 +30,53 @@ if (
 # Path settings:
 $Path = 'C:\Windows.old'
 
-# Devnull "Windows.old":
-if (Test-Path $Path) {
+# Recursive devnull directory:
+function Remove-Directory {
+    param (
+        [string]$Directory
+    )
+
     Get-ChildItem `
-        -LiteralPath $Path `
+        -LiteralPath $Directory `
         -Force `
-        -Recurse `
-        -File `
-        -ErrorAction SilentlyContinue |
-            ForEach-Object {
+        -ErrorAction SilentlyContinue `
+        | ForEach-Object {
+            if ($_.PSIsContainer) {
+                Remove-Directory $_.FullName
+            }
+            else {
                 $file = $_.FullName
 
                 Write-Host "Updating '$file' file permissions"
                 icacls.exe $file /grant '*S-1-5-32-544:F' /C | Out-Null
 
-                try
-                {
-                    Remove-Item -LiteralPath $file -Force -ErrorAction Stop
+                try {
+                    Write-Host "Attempt to delete '$file' file..."
+                    Remove-Item `
+                        -LiteralPath $file `
+                        -Force `
+                        -ErrorAction Stop
                 }
-
-                catch
-                {
+                catch {
                     Write-Warning "Failed to delete: $file"
                 }
             }
-    Write-Host "Windows.old was deleted."
+        }
+
+    try {
+        Write-Host "Attempt to delete directory '$Directory'..."
+        Remove-Item `
+            -LiteralPath $Directory `
+            -Force `
+            -ErrorAction Stop
+    }
+    catch {
+        Write-Warning "Failed to delete directory: $Directory"
+    }
 }
 
-else {
-    Write-Host "'$Path' not found."
+# Devnull "Windows.old":
+if (Test-Path $Path) {
+    Remove-Directory $Path
+    Write-Host "Windows.old was deleted."
 }
