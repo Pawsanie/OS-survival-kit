@@ -43,7 +43,12 @@ function Remove-Directory {
         | ForEach-Object {
 
             if ($_.PSIsContainer) {
-                Remove-Directory $_.FullName
+                $directory = $_.FullName
+                icacls.exe $directory `
+                    /grant '*S-1-5-32-544:F' `
+                    /C `
+                    | Out-Null
+                Remove-Directory $directory
             }
 
             else {
@@ -89,11 +94,29 @@ function Remove-Directory {
         Write-Host `
             "Attempt to delete directory...`n" `
             "Directory path: '$Directory'"
-        Remove-Item `
+
+        $children = @(
+            Get-ChildItem `
+                -LiteralPath $Directory `
+                -Force `
+                -ErrorAction SilentlyContinue
+        )
+
+        if ($children.Count -eq 0) {
+            Remove-Item `
             -LiteralPath $Directory `
             -Force `
             -ErrorAction Stop `
             -Confirm:$false
+        }
+        else {
+            Write-Host `
+            "Failed to delete directory!`n" `
+            "Folder is not empty: Failed to pre-delete all files.`n" `
+            "Directory path: '$Directory'" `
+            -ForegroundColor Yellow
+        }
+
     }
     catch {
         Write-Host `
