@@ -52,8 +52,8 @@ function Remove-Directory {
                 Write-Host `
                     "Subfolder found: '$_'`n" `
                     "Attempting to process content...`n" `
-                    "Directory path: '$Directory'" `
-                    -ForegroundColor White
+                    "Directory path: '$directory'" `
+                    -ForegroundColor Blue
 
                 Remove-Directory $directory
             }
@@ -103,14 +103,14 @@ function Remove-Directory {
             "Directory path: '$Directory'" `
             -ForegroundColor White
 
-        $children = @(
-            Get-ChildItem `
-                -LiteralPath $Directory `
-                -Force `
-                -ErrorAction SilentlyContinue
-        )
-
-        if ($children.Count -eq 0) {
+        if (
+            @(
+                Get-ChildItem `
+                    -LiteralPath $Directory `
+                    -Force `
+                    -ErrorAction SilentlyContinue
+            ).Count -eq 0
+        ) {
             Remove-Item `
             -LiteralPath $Directory `
             -Force `
