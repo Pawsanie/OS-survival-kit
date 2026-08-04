@@ -53,6 +53,8 @@ function Remove-Directory {
                     "Updating subfolder permissions...`n" `
                     "Directory path: '$directory'" `
                     -ForegroundColor White
+                takeown.exe `
+                    /F "$directory"
                 icacls.exe $directory `
                     /grant '*S-1-5-32-544:F' `
                     /C `
@@ -72,6 +74,8 @@ function Remove-Directory {
                     "Updating file permissions...`n" `
                     "File path: '$file'" `
                     -ForegroundColor White
+                takeown.exe `
+                    /F "$file"
                 icacls.exe $file `
                     /grant '*S-1-5-32-544:F' `
                     /C `
