@@ -54,7 +54,8 @@ function Remove-Directory {
                     "Directory path: '$directory'" `
                     -ForegroundColor White
                 takeown.exe `
-                    /F "$directory"
+                    /F "$directory" `
+                    | Out-Null
                 icacls.exe $directory `
                     /grant '*S-1-5-32-544:F' `
                     /C `
@@ -75,7 +76,8 @@ function Remove-Directory {
                     "File path: '$file'" `
                     -ForegroundColor White
                 takeown.exe `
-                    /F "$file"
+                    /F "$file" `
+                    | Out-Null
                 icacls.exe $file `
                     /grant '*S-1-5-32-544:F' `
                     /C `
