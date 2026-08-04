@@ -88,7 +88,7 @@ function Remove-Directory {
     try {
         Write-Host `
             "Attempt to delete directory...`n" `
-             "Directory path: '$Directory'"
+            "Directory path: '$Directory'"
         Remove-Item `
             -LiteralPath $Directory `
             -Force `
