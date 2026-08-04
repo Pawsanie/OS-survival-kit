@@ -48,6 +48,13 @@ function Remove-Directory {
                     /grant '*S-1-5-32-544:F' `
                     /C `
                     | Out-Null
+
+                Write-Host `
+                    "Subfolder found: '$_'`n" `
+                    "Attempting to process content...`n" `
+                    "Directory path: '$Directory'" `
+                    -ForegroundColor White
+
                 Remove-Directory $directory
             }
 
@@ -118,7 +125,7 @@ function Remove-Directory {
         else {
             Write-Host `
             "Failed to delete directory!`n" `
-            "Folder is not empty: Failed to pre-delete all files.`n" `
+            "Folder is not empty: failed to pre-delete all files.`n" `
             "Directory path: '$Directory'" `
             -ForegroundColor Yellow
         }
