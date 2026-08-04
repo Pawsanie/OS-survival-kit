@@ -76,7 +76,7 @@ function Remove-Directory {
                     Write-Host `
                         "File deletion successful.`n" `
                         "File path: '$file'" `
-                        -ForegroundColor White
+                        -ForegroundColor Green
                 }
 
                 catch {
@@ -93,7 +93,8 @@ function Remove-Directory {
     try {
         Write-Host `
             "Attempt to delete directory...`n" `
-            "Directory path: '$Directory'"
+            "Directory path: '$Directory'" `
+            -ForegroundColor White
 
         $children = @(
             Get-ChildItem `
@@ -112,7 +113,7 @@ function Remove-Directory {
             Write-Host `
                 "Directory deletion successful.`n" `
                 "Directory path: '$Directory'" `
-                -ForegroundColor White
+                -ForegroundColor Green
         }
         else {
             Write-Host `
@@ -153,6 +154,10 @@ function Remove-WindowsOLD {
             "Directory path: '$Path'" `
             -ForegroundColor Blue
     }
+
+    Write-Host `
+        "Windows.old devnull Scenario completed." `
+        -ForegroundColor Blue
 }
 
 Remove-WindowsOLD
