@@ -44,17 +44,24 @@ function Remove-Directory {
 
             if ($_.PSIsContainer) {
                 $directory = $_.FullName
+                Write-Host `
+                    "Subfolder found: '$_'`n" `
+                    "Directory path: '$directory'" `
+                    -ForegroundColor Blue
+
+                Write-Host `
+                    "Updating subfolder permissions...`n" `
+                    "Directory path: '$directory'" `
+                    -ForegroundColor White
                 icacls.exe $directory `
                     /grant '*S-1-5-32-544:F' `
                     /C `
                     | Out-Null
 
                 Write-Host `
-                    "Subfolder found: '$_'`n" `
-                    "Attempting to process content...`n" `
+                    "Attempting to process nested content...`n" `
                     "Directory path: '$directory'" `
-                    -ForegroundColor Blue
-
+                    -ForegroundColor White
                 Remove-Directory $directory
             }
 
