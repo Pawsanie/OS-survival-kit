@@ -7,3 +7,10 @@
 *.ps1 text eol=crlf
 *.ps1 linguist-language=PowerShell
 *.ps1 encoding=utf-8
+
+# Markdown settings:
+*.md text eol=lf
+*.md linguist-documentation
+*.md linguist-language=Markdown
+*.md diff=markdown
+*.md encoding=utf-8
