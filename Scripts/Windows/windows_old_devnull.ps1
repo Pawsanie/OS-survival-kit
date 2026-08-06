@@ -190,7 +190,7 @@ function Start-Tasks {
     $Worker = {
         param(
             [string]$Task,
-            [System.IO.DirectoryInfo]$Path
+            [string]$Path
         )
 
         Invoke-Expression $Task
@@ -211,20 +211,24 @@ function Start-Tasks {
         $PowerShellWorker = [PowerShell]::Create()
         $PowerShellWorker.RunspacePool = $Pool
 
-        $PowerShellWorker.AddScript($Worker.ToString()) `
+        $PowerShellWorker.AddScript(
+                $Worker.ToString()
+        ) `
             | Out-Null
         $PowerShellWorker.AddArgument(
                 ${function:Task}.Ast.Extent.Text
         ) `
             | Out-Null
-        $PowerShellWorker.AddArgument($Path) `
+        $PowerShellWorker.AddArgument(
+                $Path.FullName
+        ) `
             | Out-Null
         $Handle = $PowerShellWorker.BeginInvoke()
 
         [PSCustomObject]@{
             PowerShell = $PowerShellWorker
             Handle     = $Handle
-            Path       = $Path
+            Path       = $Path.FullName
         }
 
     }
