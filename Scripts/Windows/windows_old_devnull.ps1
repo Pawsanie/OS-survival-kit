@@ -29,7 +29,6 @@ if (
 
 # Path settings:
 $TargetPath = 'C:\Windows.old'
-$AdministratorsPermissions = '*S-1-5-32-544:F'
 
 # Workers srttings:
 $PermissibleLoad = 2 / 3
@@ -168,7 +167,7 @@ function Grant-Permissions {
         | Out-Null
 
     icacls.exe $Path `
-        /grant $AdministratorsPermissions `
+        /grant '*S-1-5-32-544:F' `
         /C `
         | Out-Null
 
