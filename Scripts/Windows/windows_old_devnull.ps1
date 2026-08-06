@@ -221,7 +221,7 @@ function Start-Tasks {
             | Out-Null
         $Handle = $PowerShellWorker.BeginInvoke()
 
-        [PowerShellCustomObject]@{
+        [PSCustomObject]@{
             PowerShell = $PowerShellWorker
             Handle     = $Handle
             Path       = $Path
