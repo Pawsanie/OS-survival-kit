@@ -190,7 +190,7 @@ function Start-Tasks {
     $Worker = {
         param(
             [string]$Task,
-            [string]$Path
+            [System.IO.DirectoryInfo]$Path
         )
 
         Invoke-Expression $Task
@@ -211,10 +211,10 @@ function Start-Tasks {
         $PowerShellWorker = [PowerShell]::Create()
         $PowerShellWorker.RunspacePool = $Pool
 
-        $PowerShellWorker.AddScript($Worker) `
+        $PowerShellWorker.AddScript($Worker.ToString()) `
             | Out-Null
         $PowerShellWorker.AddArgument(
-                ${function:Task}.ToString()
+                ${function:Task}.Ast.Extent.Text
         ) `
             | Out-Null
         $PowerShellWorker.AddArgument($Path) `
@@ -253,7 +253,10 @@ Devnull "Windows.old"
 function Remove-WindowsOLD {
     if (Test-Path $TargetPath) {
         Start-Tasks `
-            -Paths Get-File-Tree
+            -Paths (
+                Get-File-Tree `
+                    -Path $TargetPath
+            )
 
         if (
             -not (Test-Path $TargetPath)
@@ -262,7 +265,9 @@ function Remove-WindowsOLD {
                 -ForegroundColor Green
         }
         else {
-            Write-Error "Failed to delete the Windows.old completely!"
+            Write-Host `
+                "Failed to delete the Windows.old completely!" `
+                -ForegroundColor Red
         }
     }
 
