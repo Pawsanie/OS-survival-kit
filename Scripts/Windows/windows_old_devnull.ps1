@@ -242,7 +242,8 @@ function Task {
         $LogsQueue.Enqueue(
             [PSCustomObject]@{
                 Message = "Failed to delete file system item!`n" `
-                          + "Item path: '$Path'"
+                          + "Item path: '$Path'`n" `
+                          + "Error: $($_.Exception.ToString())"
                 Color = [ConsoleColor]::Red
             }
         )
@@ -288,7 +289,11 @@ function Start-Tasks {
         ) `
             | Out-Null
         $PowerShellWorker.AddArgument(
-                ${function:Task}.Ast.Extent.Text
+                @(
+                    ${function:Task}.Ast.Extent.Text,
+                    ${function:Grant-Permissions}.Ast.Extent.Text,
+                    ${function:Remove-File-System-Item}.Ast.Extent.Text
+                )
         ) `
             | Out-Null
         $PowerShellWorker.AddArgument(
@@ -329,12 +334,14 @@ function Start-Workers {
     # Multy thred Runspace ScriptBlock:
     $Worker = {
         param(
-            [string]$Task,
+            [string[]]$Functions,
             [System.Collections.Concurrent.ConcurrentQueue[string]]$Queue,
             [System.Collections.Concurrent.ConcurrentQueue[psobject]]$LogsQueue
         )
 
-        Invoke-Expression $Task
+        foreach ($functionStr in $Functions) {
+            Invoke-Expression $functionStr
+        }
 
         while ($true) {
 
