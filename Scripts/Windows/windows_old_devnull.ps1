@@ -214,7 +214,7 @@ function Task {
             $LogsQueue.Enqueue(
                 [PSCustomObject]@{
                     Message = "Access denied!`n" `
-                              + "Ownership and permissions must be acquired for the file system item.!`n" `
+                              + "Ownership and permissions must be acquired for the file system item!`n" `
                               + "Item path: '$Path'"
                     Color = [ConsoleColor]::Yellow
                 }
