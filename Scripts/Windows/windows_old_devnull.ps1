@@ -240,11 +240,11 @@ function Task {
 
     catch {
         $LogsQueue.Enqueue(
-            [PSCustomObject]@(
+            [PSCustomObject]@{
                 Message = "Failed to delete file system item!`n" `
                           + "Item path: '$Path'"
                 Color = [ConsoleColor]::Red
-            )
+            }
         )
     }
 
