@@ -159,7 +159,7 @@ function Grant-Permissions {
          [PSCustomObject]@(
             Message = "Updating file system item permissions...`n" `
                       + "Item path: '$Path'"
-            Color = "White"
+            Color = White
          )
     )
 
@@ -176,7 +176,7 @@ function Grant-Permissions {
         [PSCustomObject]@(
             Message = "File system item permissions successfully updated.`n" `
                       + "Item path: '$Path'"
-            Color = "White"
+            Color = White
         )
     )
 
@@ -202,7 +202,7 @@ function Task {
             [PSCustomObject]@(
                 Message = "Attempt to delete file system item...`n" `
                           + "Item path: '$Path'"
-                Color = "White"
+                Color = White
             )
     )
 
@@ -217,7 +217,7 @@ function Task {
                     Message = "Access denied!`n" `
                               + "Ownership and permissions must be acquired for the file system item.!`n" `
                               + "Item path: '$Path'"
-                    Color = "Yellow"
+                    Color = Yellow
                 )
             )
 
@@ -233,7 +233,7 @@ function Task {
             [PSCustomObject]@(
                 Message = "File system item deletion successful.`n" `
                           + "Item path: '$Path'"
-                Color = "Green"
+                Color = Green
             )
         )
     }
@@ -243,7 +243,7 @@ function Task {
             [PSCustomObject]@(
                 Message = "Failed to delete file system item!`n" `
                           + "Item path: '$Path'"
-                Color = "Red"
+                Color = Red
             )
         )
     }
@@ -377,6 +377,29 @@ function Start-Workers {
                         -LogsQueue $LogsQueue
 
         # Awaite tasks finish:
+        while (
+            $PowerShellTasks.Handle.IsCompleted `
+                -contains $false
+        ) {
+
+            $logData = $null
+            while (
+                $LogsQueue.TryDequeue(
+                    [ref]$logData
+                )
+            ) {
+
+                Write-Host `
+                    $logData.Message `
+                    -ForegroundColor $logData.Color
+
+            }
+
+            Start-Sleep `
+                -Milliseconds 20
+
+        }
+
         foreach ($PSTask in $PowerShellTasks) {
             try {
                 $PSTask.PowerShell.EndInvoke(
