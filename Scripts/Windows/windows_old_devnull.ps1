@@ -183,7 +183,7 @@ System.IO.DirectoryInfo pahs massive from Get-File-Tree.
 #>
 function Start-Tasks {
     param (
-        [massive][System.IO.DirectoryInfo]$Paths
+        [System.IO.DirectoryInfo[]]$Paths
     )
 
     # Multy thred Runspace ScriptBlock:
@@ -252,7 +252,8 @@ Devnull "Windows.old"
 #>
 function Remove-WindowsOLD {
     if (Test-Path $TargetPath) {
-        Remove-Directory $Path
+        Start-Tasks `
+            -Paths Get-File-Tree
 
         if (
             -not (Test-Path $TargetPath)
