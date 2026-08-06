@@ -268,7 +268,7 @@ function Start-Tasks {
 
         [PSCustomObject]@{
             PowerShell = $PowerShellWorker
-            Handle     = $Handle
+            Handle = $Handle
         }
 
     }
