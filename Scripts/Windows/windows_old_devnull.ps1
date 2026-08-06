@@ -152,15 +152,15 @@ Multi thread Queue from Start-Workers function for Logs.
 function Grant-Permissions {
     param (
         [string]$Path,
-        [System.Collections.Concurrent.ConcurrentQueue[string]]$LogsQueue
+        [System.Collections.Concurrent.ConcurrentQueue[psobject]]$LogsQueue
     )
 
      $LogsQueue.Enqueue(
-         [PSCustomObject]@(
+         [PSCustomObject]@{
             Message = "Updating file system item permissions...`n" `
                       + "Item path: '$Path'"
-            Color = White
-         )
+            Color = [ConsoleColor]::White
+        }
     )
 
     takeown.exe `
@@ -173,11 +173,11 @@ function Grant-Permissions {
         | Out-Null
 
     $LogsQueue.Enqueue(
-        [PSCustomObject]@(
+        [PSCustomObject]@{
             Message = "File system item permissions successfully updated.`n" `
                       + "Item path: '$Path'"
-            Color = White
-        )
+            Color = [ConsoleColor]::White
+        }
     )
 
 }
@@ -195,15 +195,15 @@ Multi thread Queue from Start-Workers function for Logs.
 function Task {
     param (
         [string]$Path,
-        [System.Collections.Concurrent.ConcurrentQueue[string]]$LogsQueue
+        [System.Collections.Concurrent.ConcurrentQueue[psobject]]$LogsQueue
     )
 
     $LogsQueue.Enqueue(
-            [PSCustomObject]@(
+            [PSCustomObject]@{
                 Message = "Attempt to delete file system item...`n" `
                           + "Item path: '$Path'"
-                Color = White
-            )
+                Color = [ConsoleColor]::White
+            }
     )
 
     try {
@@ -213,12 +213,12 @@ function Task {
         }
         catch {
             $LogsQueue.Enqueue(
-                [PSCustomObject]@(
+                [PSCustomObject]@{
                     Message = "Access denied!`n" `
                               + "Ownership and permissions must be acquired for the file system item.!`n" `
                               + "Item path: '$Path'"
-                    Color = Yellow
-                )
+                    Color = [ConsoleColor]::Yellow
+                }
             )
 
             Grant-Permissions `
@@ -230,11 +230,11 @@ function Task {
         }
 
         $LogsQueue.Enqueue(
-            [PSCustomObject]@(
+            [PSCustomObject]@{
                 Message = "File system item deletion successful.`n" `
                           + "Item path: '$Path'"
-                Color = Green
-            )
+                Color = [ConsoleColor]::Green
+            }
         )
     }
 
@@ -243,7 +243,7 @@ function Task {
             [PSCustomObject]@(
                 Message = "Failed to delete file system item!`n" `
                           + "Item path: '$Path'"
-                Color = Red
+                Color = [ConsoleColor]::Red
             )
         )
     }
@@ -275,7 +275,7 @@ function Start-Tasks {
         [System.Management.Automation.Runspaces.RunspacePool]$Pool,
         [scriptblock]$Worker,
         [System.Collections.Concurrent.ConcurrentQueue[string]]$Queue,
-        [System.Collections.Concurrent.ConcurrentQueue[string]]$LogsQueue
+        [System.Collections.Concurrent.ConcurrentQueue[psobject]]$LogsQueue
     )
 
     foreach ($index in 1..$Flows) {
@@ -331,7 +331,7 @@ function Start-Workers {
         param(
             [string]$Task,
             [System.Collections.Concurrent.ConcurrentQueue[string]]$Queue,
-            [System.Collections.Concurrent.ConcurrentQueue[string]]$LogsQueue
+            [System.Collections.Concurrent.ConcurrentQueue[psobject]]$LogsQueue
         )
 
         Invoke-Expression $Task
@@ -354,7 +354,7 @@ function Start-Workers {
     }
 
     # Multythreds settings:
-    $LogsQueue = [System.Collections.Concurrent.ConcurrentQueue[string]]::new()
+    $LogsQueue = [System.Collections.Concurrent.ConcurrentQueue[psobject]]::new()
     $Pool = [RunspaceFactory]::CreateRunspacePool(
             1,
             $Flows
