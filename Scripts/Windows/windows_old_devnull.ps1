@@ -70,21 +70,49 @@ function Get-Files-Tree {
             -Recurse `
             -Directory `
             -ErrorAction SilentlyContinue `
-            | Sort-Object FullName.Split('\').Count `
+            | Sort-Object `
+                -Property {
+                    $CurrentPath = if ($_.FullName) {$_.FullName} `
+                        else {$_.PSPath}
+                    $Depth = [regex]::Matches(
+                            $CurrentPath,
+                            [regex]::Escape(
+                                    [System.IO.Path]::DirectorySeparatorChar
+                            )
+                        ).Count
+                    $Depth
+                } `
                 -Descending
     ) {
 
-         if ($Item.PSIsContainer) {
-             $Items.DirectoriesQueue.Add(
-                     $Item.FullName
-             )
-         }
+        try {
 
-         else {
-             $FilesQueue.Enqueue(
-                    $Item.FullName
-            )
-         }
+            if ($Item.PSIsContainer) {
+                 $DirectoriesQueue.Enqueue(
+                         $Item.FullName
+                )
+             }
+
+             else {
+                     $FilesQueue.Enqueue(
+                            $Item.FullName
+                )
+             }
+
+             Write-Host `
+                "The path has been added to multithreaded processing queue.`n" `
+                "Item path: '$($Item.FullName)'" `
+                -ForegroundColor White
+
+        }
+
+        catch {
+            Write-Host `
+                "Failed to add path to multithreaded processing queue!`n" `
+                "Item path: '$($Item.FullName)'" `
+                -ForegroundColor Red
+        }
+
 
     }
 
@@ -349,7 +377,8 @@ function Remove-WindowsOLD {
         Remove-File-System-Item `
             -Path $TargetPath
 
-        Write-Host "Windows.old deleted successfully." `
+        Write-Host `
+            "Windows.old deleted successfully." `
             -ForegroundColor Green
     }
 
