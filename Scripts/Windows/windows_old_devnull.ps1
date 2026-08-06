@@ -40,17 +40,22 @@ $Flows = [int](
 
 <#
 .SYNOPSIS
-Get path massive for warkers.
+Get path string massive for warkers multi thread Queue.
 
 .PARAMETER Path
 Path to Windows.old directory.
 
-.OUTPUTS
-System.IO.DirectoryInfo pahs massive.
+.PARAMETER DirectoriesQueue
+Multi thread Queue from main function for Directories.
+
+.PARAMETER FilesQueue
+Multi thread Queue from main function for Files.
 #>
-function Get-File-Tree {
+function Get-Files-Tree {
     param (
-        [string]$Path
+        [string]$Path,
+        [System.Collections.Concurrent.ConcurrentQueue[string]]$DirectoriesQueue,
+        [System.Collections.Concurrent.ConcurrentQueue[string]]$FilesQueue
     )
 
     Write-Host `
@@ -58,20 +63,36 @@ function Get-File-Tree {
         "Directory path: '$Path'" `
         -ForegroundColor Blue
 
-     @(
-        Get-ChildItem `
+    foreach (
+        $Item in Get-ChildItem `
             -LiteralPath $Path `
             -Force `
             -Recurse `
             -Directory `
             -ErrorAction SilentlyContinue `
-            | Sort-Object FullName `
+            | Sort-Object FullName.Split('\').Count `
                 -Descending
-    )
+    ) {
+
+         if ($Item.PSIsContainer) {
+             $Items.DirectoriesQueue.Add(
+                     $Item.FullName
+             )
+         }
+
+         else {
+             $FilesQueue.Enqueue(
+                    $Item.FullName
+            )
+         }
+
+    }
+
 }
 
 <#
 .SYNOPSIS
+Devnulls some Windows.old file system item.
 
 .PARAMETER Path
 Path to file or directory.
@@ -176,37 +197,29 @@ function Task {
 
 <#
 .SYNOPSIS
-Create and run multi thread tasks.
+Assign tasks to multithreaded workers.
 
-.PARAMETER Paths
-System.IO.DirectoryInfo pahs massive from Get-File-Tree.
+.PARAMETER Flows
+Max threds number.
+
+.PARAMETER Pool
+Threds pool.
+
+.PARAMETER Worker
+Multy thred Runspace ScriptBlock.
+
+.PARAMETER Queue
+Multi thread Queue from main function for Files or Directories.
 #>
 function Start-Tasks {
-    param (
-        [System.IO.DirectoryInfo[]]$Paths
+    param(
+        [int]$Flows,
+        [System.Management.Automation.Runspaces.RunspacePool]$Pool,
+        [scriptblock]$Worker,
+        [System.Collections.Concurrent.ConcurrentQueue[string]]$Queue
     )
 
-    # Multy thred Runspace ScriptBlock:
-    $Worker = {
-        param(
-            [string]$Task,
-            [string]$Path
-        )
-
-        Invoke-Expression $Task
-        Task $Path
-    }
-
-    # Multythreds settings:
-    $Pool = [RunspaceFactory]::CreateRunspacePool(
-            1,
-            $Flows
-    )
-
-    # Run tasks:
-    $Pool.Open()
-
-    $PowerShellTasks = foreach ($Path in $Paths) {
+    foreach ($index in 1..$Flows) {
 
         $PowerShellWorker = [PowerShell]::Create()
         $PowerShellWorker.RunspacePool = $Pool
@@ -220,7 +233,7 @@ function Start-Tasks {
         ) `
             | Out-Null
         $PowerShellWorker.AddArgument(
-                $Path.FullName
+                $Queue
         ) `
             | Out-Null
         $Handle = $PowerShellWorker.BeginInvoke()
@@ -228,21 +241,85 @@ function Start-Tasks {
         [PSCustomObject]@{
             PowerShell = $PowerShellWorker
             Handle     = $Handle
-            Path       = $Path.FullName
         }
 
     }
 
-    # Awaite tasks finish:
-    foreach ($PSTask in $PowerShellTasks) {
-        try {
-            $PSTask.PowerShell.EndInvoke(
-                    $PSTask.Handle
-            )
+}
+
+<#
+.SYNOPSIS
+Create and run multi thread tasks.
+
+.PARAMETER DirectoriesQueue
+Multi thread Queue from main function for Directories.
+
+.PARAMETER FilesQueue
+Multi thread Queue from main function for Files.
+#>
+function Start-Workers {
+    param (
+        [System.Collections.Concurrent.ConcurrentQueue[string]]$DirectoriesQueue,
+        [System.Collections.Concurrent.ConcurrentQueue[string]]$FilesQueue
+    )
+
+    # Multy thred Runspace ScriptBlock:
+    $Worker = {
+        param(
+            [string]$Task,
+            [System.Collections.Concurrent.ConcurrentQueue[string]]$Queue
+        )
+
+        Invoke-Expression $Task
+
+        while ($true) {
+
+            $CurrentPath = $null
+            if (
+                -not $Queue.TryDequeue(
+                        [ref]$CurrentPath
+                )
+            ) {
+                break
+            }
+
+            Task $CurrentPath
         }
-        finally {
-            $PSTask.PowerShell.Dispose()
+    }
+
+    # Multythreds settings:
+    $Pool = [RunspaceFactory]::CreateRunspacePool(
+            1,
+            $Flows
+    )
+    $Pool.Open()
+
+    foreach (
+        $Queue in @(
+            $FilesQueue,
+            $DirectoriesQueue
+        )
+    ) {
+
+        # Run tasks:
+        $PowerShellTasks = Start-Tasks `
+                        -Flows $Flows `
+                        -Pool $Pool `
+                        -Worker $Worker `
+                        -Queue $Queue
+
+        # Awaite tasks finish:
+        foreach ($PSTask in $PowerShellTasks) {
+            try {
+                $PSTask.PowerShell.EndInvoke(
+                        $PSTask.Handle
+                )
+            }
+            finally {
+                $PSTask.PowerShell.Dispose()
+            }
         }
+
     }
 
     $Pool.Close()
@@ -252,31 +329,50 @@ function Start-Tasks {
 
 <#
 .SYNOPSIS
-Devnull "Windows.old"
+Devnulls Windows.old folder.
 #>
 function Remove-WindowsOLD {
-    if (Test-Path $TargetPath) {
+
+    $DirectoriesQueue = [System.Collections.Concurrent.ConcurrentQueue[string]]::new()
+    $FilesQueue = [System.Collections.Concurrent.ConcurrentQueue[string]]::new()
+
+    Get-Files-Tree `
+        -Path $TargetPath `
+        -DirectoriesQueue $DirectoriesQueue `
+        -FilesQueue $FilesQueue
+
+    Start-Workers `
+        -DirectoriesQueue $DirectoriesQueue `
+        -FilesQueue $FilesQueue
+
+    try {
+        Remove-File-System-Item `
+            -Path $TargetPath
+
+        Write-Host "Windows.old deleted successfully." `
+            -ForegroundColor Green
+    }
+
+    catch {
         Write-Host `
-            "The Windows.old directory deletion script has been launched."`
-                -ForegroundColor White
+            "Failed to delete the Windows.old completely!" `
+            -ForegroundColor Red
+    }
 
-        Start-Tasks `
-            -Paths (
-                Get-File-Tree `
-                    -Path $TargetPath
-            )
+}
 
-        if (
-            -not (Test-Path $TargetPath)
-        ) {
-            Write-Host "Windows.old deleted successfully." `
-                -ForegroundColor Green
-        }
-        else {
-            Write-Host `
-                "Failed to delete the Windows.old completely!" `
-                -ForegroundColor Red
-        }
+<#
+.SYNOPSIS
+Runs devnull Windows.old pipeline.
+#>
+function Main {
+
+    Write-Host `
+        "The Windows.old directory deletion script has been launched."`
+        -ForegroundColor White
+
+    if (Test-Path $TargetPath) {
+        Remove-WindowsOLD
     }
 
     else {
@@ -293,4 +389,4 @@ function Remove-WindowsOLD {
 }
 
 # Entry point:
-Remove-WindowsOLD
+Main
