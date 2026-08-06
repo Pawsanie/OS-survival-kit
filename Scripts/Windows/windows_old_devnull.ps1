@@ -185,6 +185,7 @@ function Start-Tasks {
     param (
         [massive][System.IO.DirectoryInfo]$Paths
     )
+
     # Multy thred Runspace ScriptBlock:
     $Worker = {
         param(
@@ -277,4 +278,5 @@ function Remove-WindowsOLD {
 
 }
 
+# Entry point:
 Remove-WindowsOLD
