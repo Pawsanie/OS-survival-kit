@@ -252,6 +252,10 @@ Devnull "Windows.old"
 #>
 function Remove-WindowsOLD {
     if (Test-Path $TargetPath) {
+        Write-Host `
+            "The Windows.old directory deletion script has been launched."`
+                -ForegroundColor White
+
         Start-Tasks `
             -Paths (
                 Get-File-Tree `
