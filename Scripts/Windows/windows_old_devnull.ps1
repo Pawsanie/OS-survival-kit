@@ -67,7 +67,6 @@ function Get-Files-Tree {
             -LiteralPath $Path `
             -Force `
             -Recurse `
-            -Directory `
             -ErrorAction SilentlyContinue `
             | Sort-Object `
                 -Property {
