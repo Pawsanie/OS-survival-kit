@@ -30,3 +30,6 @@ For **Windows**:
 ```cmd
 whoami /groups | findstr S-1-5-32-544 >nul && echo True || echo False
 ```
+If the terminal displays "**True**" then you are a member of the Administrators group.<br>
+and you can execute scripts from this repository.<br>
+However, if you see "**False**" instead, then you need to contact your administrator or PC owner to resolve your issue.
