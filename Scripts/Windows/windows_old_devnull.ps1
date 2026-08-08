@@ -128,11 +128,22 @@ function Remove-File-System-Item {
         [string]$Path
     )
 
-    Remove-Item `
-        -LiteralPath $Path `
-        -Force `
-        -ErrorAction Stop `
-        -Confirm:$false
+    if (
+        $(
+            Get-Item `
+                -LiteralPath $Path `
+                -Force
+        ).PSIsContainer
+    ) {
+        [System.IO.Directory]::Delete(
+                $Path
+        )
+    }
+    else {
+        [System.IO.File]::Delete(
+                $Path
+        )
+    }
 
 }
 
