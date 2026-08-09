@@ -1,6 +1,6 @@
 #!/usr/bin/env pwsh
 #requires -Version 5.1
-# The script grants all accounts in the Administrators group permissions to read all WER reports.
+# The script grants to the current administrator permissions to read all WER reports.
 
 <#
 Unix Root user equivalent for scripts:
@@ -26,6 +26,10 @@ if (
     )
     exit
 }
+
+Write-Host `
+    "WER reports permissions update script has been launched."`
+    -ForegroundColor White
 
 Get-ChildItem `
     -LiteralPath 'C:\ProgramData\Microsoft\Windows\WER\ReportArchive' `
@@ -57,3 +61,7 @@ Get-ChildItem `
             -ForegroundColor Green
 
     }
+
+Write-Host `
+    "WER reports permissions update Scenario completed." `
+    -ForegroundColor Blue
