@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 #requires -Version 5.1
 
-function Clear-Windows-Update-Сache {
+function Clear-Windows-Update-Cache {
 
     $windowsUpdateServices = @(
         "cryptsvc"
@@ -16,6 +16,7 @@ function Clear-Windows-Update-Сache {
     Remove-Item "$env:windir\SoftwareDistribution\*" `
         -Recurse `
         -Force
+    
     Remove-Item "$env:windir\System32\catroot2\*" `
         -Recurse `
         -Force
@@ -38,7 +39,13 @@ function Start-Recovery-Trick {
 
 function Main {
 
-    Clear-Windows-Update-Сache
+    try {
+        Clear-Windows-Update-Сache `
+            -ErrorAction Stop
+    }
+    catch {
+        return
+    }
     Start-Recovery-Trick
 
 }
