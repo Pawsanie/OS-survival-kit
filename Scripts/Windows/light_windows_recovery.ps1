@@ -73,6 +73,7 @@ function Main {
         Write-Error $_
         return
     }
+
     Start-Recovery-Trick
 
 }
