@@ -39,6 +39,15 @@ function Clear-Windows-Update-Cache {
         -Name $windowsUpdateServices `
         -Force
 
+    foreach ($serviceName in $windowsUpdateServices) {
+        $service = Get-Service `
+            -Name $serviceName
+
+        $service.WaitForStatus(
+            [System.ServiceProcess.ServiceControllerStatus]::Stopped
+        )
+    }
+
     Remove-Item "$env:windir\SoftwareDistribution\*" `
         -Recurse `
         -Force
@@ -49,6 +58,14 @@ function Clear-Windows-Update-Cache {
 
     Start-Service `
         -Name $windowsUpdateServices
+
+    foreach ($serviceName in $windowsUpdateServices) {
+        $service = Get-Service -Name $serviceName
+
+        $service.WaitForStatus(
+            [System.ServiceProcess.ServiceControllerStatus]::Running
+        )
+    }
 
 }
 
