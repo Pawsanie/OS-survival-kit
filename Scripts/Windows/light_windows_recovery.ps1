@@ -20,7 +20,7 @@ if (
             '-NoProfile',
             '-ExecutionPolicy',
             'Bypass',
-            '-NoExit'
+            '-NoExit',
             '-File',
             $PSCommandPath
     )
