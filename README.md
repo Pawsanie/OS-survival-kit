@@ -16,6 +16,11 @@ the investigation and resolution of which can take hours.
 Contains information about requirements to execute scripts and how to check them.
 * [Required](#Required)
 
+### Quick Start:
+Contains information about requirements to execute scripts and how to check them.
+* [Quick Start for the Technically Uninitiated](#Quick-Start-for-the-Technically-Uninitiated)
+* [Quick Start for Engineers](#Quick-Start-for-Engineers)
+
 ___
 <br>
 
@@ -33,3 +38,7 @@ whoami /groups | findstr S-1-5-32-544 >nul && echo True || echo False
 If the terminal displays "**True**" then you are a member of the Administrators group.<br>
 and you can execute scripts from this repository.<br>
 However, if you see "**False**" instead, then you need to contact your administrator or PC owner to resolve your issue.
+
+## Quick Start for the Technically Uninitiated
+
+## Quick Start for Engineers
