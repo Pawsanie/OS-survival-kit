@@ -11,7 +11,7 @@ if (
         [Security.Principal.WindowsPrincipal] `
         [Security.Principal.WindowsIdentity]::GetCurrent()
     ).IsInRole(
-            [Security.Principal.WindowsBuiltInRole]::Administrator
+        [Security.Principal.WindowsBuiltInRole]::Administrator
     )
 ) {
     Start-Process powershell `
@@ -48,13 +48,18 @@ function Clear-Windows-Update-Cache {
         )
     }
 
-    Remove-Item "$env:windir\SoftwareDistribution\*" `
-        -Recurse `
-        -Force
+    foreach (
+        $path in @(
+            "$env:windir\SoftwareDistribution\*",
+            "$env:windir\System32\catroot2\*"
+        )
+    ) {
 
-    Remove-Item "$env:windir\System32\catroot2\*" `
-        -Recurse `
-        -Force
+        Remove-Item $path `
+            -Recurse `
+            -Force
+
+    }
 
     Start-Service `
         -Name $windowsUpdateServices
@@ -76,7 +81,8 @@ function Start-Recovery-Trick {
         /Cleanup-Image `
         /RestoreHealth
 
-    sfc.exe /scannow
+    sfc.exe `
+        /scannow
 
 }
 
