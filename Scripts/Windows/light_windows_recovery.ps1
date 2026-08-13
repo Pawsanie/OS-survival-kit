@@ -1,5 +1,6 @@
 #!/usr/bin/env pwsh
 #requires -Version 5.1
+# The script attempts to soft-restore Windows from WinSxS with DISM.
 
 <#
 Unix Root user equivalent for scripts:
@@ -27,6 +28,11 @@ if (
     exit
 }
 
+
+<#
+.SYNOPSIS
+Clears DISM and Windows Update cache.
+#>
 function Clear-Windows-Update-Cache {
 
     $windowsUpdateServices = @(
@@ -74,6 +80,10 @@ function Clear-Windows-Update-Cache {
 
 }
 
+<#
+.SYNOPSIS
+Restore Windows from WinSxS storedge.
+#>
 function Start-Recovery-Trick {
 
     DISM.exe `
@@ -86,6 +96,10 @@ function Start-Recovery-Trick {
 
 }
 
+<#
+.SYNOPSIS
+Runs light Windows recovery pipeline.
+#>
 function Main {
 
     try {
