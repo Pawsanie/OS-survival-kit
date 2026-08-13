@@ -20,12 +20,20 @@ function New-GPG-Backup-Folder {
             $BackupPath
 
     }
+    else {
+
+        Write-Host `
+            "The catalog already exists..."`
+            -ForegroundColor White
+
+    }
 
 }
 
 <#
 .SYNOPSIS
-Export real GPG keys files.
+Export OpenPGP keys files.
+When executing the function code, you must enter a GPG key password if necessary.
 #>
 function Export-GPG-Keys {
 
@@ -73,9 +81,36 @@ Runs GPG keys export pipeline.
 #>
 function Main {
 
-    New-GPG-Backup-Folder
+    Write-Host `
+        "The GPG export script has been launched."`
+        -ForegroundColor Blue
+
+    try {
+        Write-Host `
+            "Attempting to create a directory for secrets..."`
+            -ForegroundColor White
+        New-GPG-Backup-Folder
+    }
+    catch {
+        Write-Host `
+            "Unable to create directory for secrets!`nPath: $($BackupPath)"`
+            -ForegroundColor Red
+        return
+    }
+
+    Write-Host `
+        "Attempt to export OpenPGP secrets..."`
+        -ForegroundColor White
     Export-GPG-Keys
+
+    Write-Host `
+        "TAttempt to export optional GPG configs"`
+        -ForegroundColor White
     Export-Optional-GPG-Configs
+
+    Write-Host `
+        "GPG export script Scenario completed." `
+        -ForegroundColor Blue
 
 }
 
