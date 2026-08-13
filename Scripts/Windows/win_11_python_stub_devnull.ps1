@@ -47,11 +47,14 @@ foreach ($folder in $folders) {
             | ForEach-Object {
 
                 try {
+
                     if (
                         $_.Attributes `
                             -band [System.IO.FileAttributes]::ReadOnly
                     ) {
+
                         $_.Attributes = 'Normal'
+
                     }
 
                     Remove-Item `
@@ -59,10 +62,15 @@ foreach ($folder in $folders) {
                         -Force `
                         -ErrorAction Stop
 
-                    Write-Host "Deleted: $($_.FullName)"
+                    Write-Host `
+                        "Deleted: $($_.FullName)"
 
-                } catch {
-                    Write-Warning "Failed to delete $($_.FullName): $_"
+                }
+                catch {
+
+                    Write-Warning `
+                        "Failed to delete $($_.FullName): $_"
+
                 }
 
             }
@@ -71,10 +79,15 @@ foreach ($folder in $folders) {
 
 try {
 
-    Write-Host "`nChecking 'where python':"
-    & where.exe python 2>$null `
-    | ForEach-Object { Write-Host "  $_" }
+    Write-Host `
+        "`nChecking 'where python':"
+        & where.exe python 2>$null `
+        | ForEach-Object { Write-Host "  $_" }
 
-} catch {
-    Write-Warning "Failed to execute 'where python': $_"
+}
+catch {
+
+    Write-Warning `
+        "Failed to execute 'where python': $_"
+
 }
