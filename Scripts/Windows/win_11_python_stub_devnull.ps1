@@ -21,6 +21,7 @@ if (
             '-NoProfile',
             '-ExecutionPolicy',
             'Bypass',
+            '-NoExit',
             '-File',
             $PSCommandPath
     )
