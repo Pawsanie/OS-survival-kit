@@ -104,7 +104,7 @@ function Main {
     Export-GPG-Keys
 
     Write-Host `
-        "TAttempt to export optional GPG configs"`
+        "Attempt to export optional GPG configs"`
         -ForegroundColor White
     Export-Optional-GPG-Configs
 
