@@ -103,12 +103,17 @@ Runs light Windows recovery pipeline.
 function Main {
 
     try {
+
         Clear-Windows-Update-Cache `
             -ErrorAction Stop
+
     }
+
     catch {
+
         Write-Error $_
         return
+        
     }
 
     Start-Recovery-Trick
