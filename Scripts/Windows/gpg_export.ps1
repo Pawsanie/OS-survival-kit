@@ -39,14 +39,31 @@ function Export-GPG-Keys {
 
     gpg `
         --armor `
-        --export > "$($BackupPath)\public-keys.asc"
+        --export `
+        --output  "$($BackupPath)\public-keys.asc"
 
     gpg `
         --armor `
-        --export-secret-keys > "$($BackupPath)\private-keys.asc"
+        --export-secret-keys `
+        --output "$($BackupPath)\private-keys.asc"
 
-    gpg `
-        --export-ownertrust > "$($BackupPath)\ownertrust.txt"
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+    [System.IO.File]::WriteAllLines(
+
+            "$BackupPath\ownertrust.txt",
+
+            $(
+                gpg `
+                    --export-ownertrust
+            ),
+
+            $(
+                New-Object `
+                    System.Text.UTF8Encoding(
+                        $false
+                    )
+            )
+    )
 
 }
 
