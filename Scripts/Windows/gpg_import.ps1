@@ -6,7 +6,7 @@
 $TargetDisc = "D"
 $BackupPath = "$($TargetDisc):\gpg-backup"
 
-# Functional constants:
+# Functional variables:
 $GPGPath = ""
 
 <#
@@ -46,6 +46,7 @@ function Test-GPG {
 <#
 .SYNOPSIS
 Import OpenPGP keys files.
+When executing the function code, you must enter a GPG key password if necessary.
 #>
 function Import-GPG-Keys {
 
