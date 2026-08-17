@@ -65,6 +65,7 @@ However, if you see "**False**" instead, then you need to contact your administr
 10) Press "**Ctrl+A**" and "**Ctrl+C**" again to copy code with 2 additional lines.
 11) Return to the "**Administrator Windows PowerShell**" window.
 12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.<br>
+
 :hearts:Done: You are amazing!:hearts:
 
 ## Quick Start for Engineers
