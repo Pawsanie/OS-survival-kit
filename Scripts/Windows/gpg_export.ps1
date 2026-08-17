@@ -103,16 +103,22 @@ function Main {
         -ForegroundColor Blue
 
     try {
+
         Write-Host `
             "Attempting to create a directory for secrets..."`
             -ForegroundColor White
+
         New-GPG-Backup-Folder
+
     }
     catch {
+
         Write-Host `
             "Unable to create directory for secrets!`nPath: $($BackupPath)"`
             -ForegroundColor Red
+
         return
+
     }
 
     Write-Host `
