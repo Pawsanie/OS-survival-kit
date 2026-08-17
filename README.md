@@ -62,7 +62,9 @@ However, if you see "**False**" instead, then you need to contact your administr
    copy its entire text by double-clicking on it with the left mouse button, and then pressing the "**Ctrl+A**" and "**Ctrl+C**".
 8) Return to the notepad window and paste the copied code there by "**Ctrl+V**" key combination.
 9) Press "**Enter**" twice to indent lines 2 times.
-10) Press "**Ctrl+A**" and "**Ctrl+C**" again to copy code with 2 additional lines.
+10) Press "**Ctrl+A**" and "**Ctrl+C**" again to copy code with 2 additional lines.<br>
+    This is necessary for the script to work correctly,<br>
+    since the code repository does not show line breaks after the text has actually ended when viewed through a web page.
 11) Return to the "**Administrator Windows PowerShell**" window.
 12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.
 13) Restore the security policy to its previous state using the command:
