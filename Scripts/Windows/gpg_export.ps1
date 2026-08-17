@@ -132,7 +132,7 @@ function Main {
     Export-Optional-GPG-Configs
 
     Write-Host `
-        "GPG export script Scenario completed." `
+        "GPG export script scenario completed." `
         -ForegroundColor Blue
 
 }

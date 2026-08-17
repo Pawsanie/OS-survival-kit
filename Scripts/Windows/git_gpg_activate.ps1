@@ -132,7 +132,7 @@ Runs Git GPG signing activation pipeline.
 function Main {
 
     Write-Host `
-        "The GPG signing activation has been launched."`
+        "The GPG signing activation script has been launched."`
         -ForegroundColor White
 
     try {
@@ -193,7 +193,7 @@ function Main {
         -OpenPGPKeyId $gpgId
 
     Write-Host `
-        "GPG signing activation Scenario completed." `
+        "GPG signing activation scenario completed." `
         -ForegroundColor Blue
 
 }

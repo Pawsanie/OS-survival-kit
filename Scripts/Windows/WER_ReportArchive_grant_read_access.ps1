@@ -63,5 +63,5 @@ Get-ChildItem `
     }
 
 Write-Host `
-    "WER reports permissions update Scenario completed." `
+    "WER reports permissions update scenario completed." `
     -ForegroundColor Blue

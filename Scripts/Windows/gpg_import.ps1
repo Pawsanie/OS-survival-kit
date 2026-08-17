@@ -38,6 +38,8 @@ function Test-GPG {
             "Gpg4win not installed!" `
             -ForegroundColor Red
 
+        throw
+
     }
 
 }
@@ -65,14 +67,30 @@ Runs GPG keys import pipeline.
 #>
 function Main {
 
+    Write-Host `
+        "The GPG OpenPGP keys import script has been launched."`
+        -ForegroundColor White
+
     try {
 
         Test-GPG
 
     }
-    catch {}
+    catch {
+
+        Write-Host `
+            "Script execution was terminated due to non-compliance with requirements..." `
+            -ForegroundColor Red
+
+        return
+
+    }
 
     Import-GPG-Keys
+
+    Write-Host `
+        "GPG OpenPGP keys import scenario completed." `
+        -ForegroundColor Blue
 
 }
 

@@ -491,7 +491,7 @@ function Main {
     }
 
     Write-Host `
-        "Windows.old devnull Scenario completed." `
+        "Windows.old devnull scenario completed." `
         -ForegroundColor Blue
 
 }
