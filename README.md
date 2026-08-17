@@ -41,6 +41,32 @@ However, if you see "**False**" instead, then you need to contact your administr
 
 ## Quick Start for the Technically Uninitiated
 
+1) Press the "**Win+R**" keyboard keys combination.
+2) In the window that opens, type "**PowerShell**" and press "**Ctrl+Shift+Enter**" keyboard keys combination.<br>
+   Please note that this window is called "**Administrator Windows PowerShell**".
+3) **Copy** and **paste** the command below into the window and then press Enter.
+   ```powershell
+   Get-ExecutionPolicy -Scope CurrentUser
+   ```
+   Remember the value that was shown in the output, especially if it was "**Undefined**" or "**Restricted**".<br>
+   You will need it to restore the original policy later.
+4) **Copy** and **paste** the command below into the window and then press Enter.
+   ```powershell
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    ```
+5) Press the "**Win+R**" keyboard keys combination again.
+6) In the window that opens, write "**notepad**" and press "**Enter**".<br>
+   Due to the specific nature of the program, the window that opens will likely not have a name.<br>
+   Just remember that its name is "**Notepad**".
+7) By following the link from the documentation, or from the repository itself, to the script code, <br>
+   copy its entire text by double-clicking on it with the left mouse button, and then pressing the "**Ctrl+A**" and "**Ctrl+C**".
+8) Return to the notepad window and paste the copied code there by "**Ctrl+V**" key combination.
+9) Press "**Enter**" twice to indent lines 2 times.
+10) Press "**Ctrl+A**" and "**Ctrl+C**" again to copy code with 2 additional lines.
+11) Return to the "**Administrator Windows PowerShell**" window.
+12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.
+:hearts:Done: You are amazing!:hearts:
+
 ## Quick Start for Engineers
 
 1) Press the "**Win+R**" keyboard keys combination.
@@ -70,7 +96,8 @@ However, if you see "**False**" instead, then you need to contact your administr
        ```powershell
        Set-ExecutionPolicy Bypass -Scope CurrentUser
        ```
-5) After executing the required scenarios revert the policies to the default state "**Undefined**", or to state "**Restricted**" if necessary.
+5) Run the script which you need through IDE or the PowerShell terminal.
+6) After executing the required scenarios revert the policies to the default state "**Undefined**", or to state "**Restricted**" if necessary.
     ```powershell
     Set-ExecutionPolicy Undefined
     Set-ExecutionPolicy Undefined -Scope CurrentUser
@@ -80,3 +107,7 @@ However, if you see "**False**" instead, then you need to contact your administr
     Set-ExecutionPolicy Restricted
     Set-ExecutionPolicy Restricted -Scope CurrentUser
     ```
+
+***
+
+:hearts: **Thank you** for your interest in my work! :hearts:<br><br>
