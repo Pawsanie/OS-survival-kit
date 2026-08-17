@@ -58,13 +58,13 @@ However, if you see "**False**" instead, then you need to contact your administr
 6) In the window that opens, write "**notepad**" and press "**Enter**".<br>
    Due to the specific nature of the program, the window that opens will likely not have a name.<br>
    Just remember that its name is "**Notepad**".
-7) By following the link from the documentation, or from the repository itself, to the script code, <br>
+7) By following the link from the documentation, or from the repository itself, to the script code,<br>
    copy its entire text by double-clicking on it with the left mouse button, and then pressing the "**Ctrl+A**" and "**Ctrl+C**".
 8) Return to the notepad window and paste the copied code there by "**Ctrl+V**" key combination.
 9) Press "**Enter**" twice to indent lines 2 times.
 10) Press "**Ctrl+A**" and "**Ctrl+C**" again to copy code with 2 additional lines.
 11) Return to the "**Administrator Windows PowerShell**" window.
-12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.
+12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.<br>
 :hearts:Done: You are amazing!:hearts:
 
 ## Quick Start for Engineers
