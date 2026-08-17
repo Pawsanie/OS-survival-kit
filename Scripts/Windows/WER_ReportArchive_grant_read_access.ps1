@@ -32,7 +32,7 @@ Write-Host `
     -ForegroundColor White
 
 Get-ChildItem `
-    -LiteralPath 'C:\ProgramData\Microsoft\Windows\WER\ReportArchive' `
+    -LiteralPath "$env:ProgramFiles\Microsoft\Windows\WER\ReportArchive" `
     -Force `
     -Directory `
     -ErrorAction SilentlyContinue `

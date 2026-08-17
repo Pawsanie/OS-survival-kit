@@ -28,7 +28,7 @@ if (
 }
 
 # Path settings:
-$TargetPath = 'C:\Windows.old'
+$TargetPath = "$env:SystemDrive\Windows.old"
 
 # Workers srttings:
 $PermissibleLoad = 2 / 3

@@ -31,7 +31,7 @@ if (
 # Path settings:
 $folders = @(
     "$env:LOCALAPPDATA\Microsoft\WindowsApps",
-    "C:\Windows\AppInstaller"
+    "$env:WINDIR\AppInstaller"
 )
 
 foreach ($folder in $folders) {
