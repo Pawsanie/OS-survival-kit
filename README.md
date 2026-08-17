@@ -64,7 +64,15 @@ However, if you see "**False**" instead, then you need to contact your administr
 9) Press "**Enter**" twice to indent lines 2 times.
 10) Press "**Ctrl+A**" and "**Ctrl+C**" again to copy code with 2 additional lines.
 11) Return to the "**Administrator Windows PowerShell**" window.
-12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.<br>
+12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.
+13) Restore the security policy to its previous state using the command:
+   ```powershell
+    Set-ExecutionPolicy RemoteSigned -Scope <the value you remembered in step 3>
+   ```
+   As an example, your default value is likely:
+   ```powershell
+    Set-ExecutionPolicy RemoteSigned -Scope Undefined
+   ```
 
 :hearts:Done: You are amazing!:hearts:
 
