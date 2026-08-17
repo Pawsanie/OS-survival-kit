@@ -67,11 +67,11 @@ However, if you see "**False**" instead, then you need to contact your administr
 12) Paste the code there by "**Ctrl+V**" key combination and press "**Enter**" to execute it.
 13) Restore the security policy to its previous state using the command:
    ```powershell
-    Set-ExecutionPolicy RemoteSigned -Scope <the value you remembered in step 3>
+    Set-ExecutionPolicy <the value you remembered in step 3> -Scope CurrentUser
    ```
    As an example, your default value is likely:
    ```powershell
-    Set-ExecutionPolicy RemoteSigned -Scope Undefined
+    Set-ExecutionPolicy Undefined -Scope CurrentUser
    ```
 
 :hearts:Done: You are amazing!:hearts:
