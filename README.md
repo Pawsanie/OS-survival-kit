@@ -132,7 +132,12 @@ In the Microsoft Windows family of operating systems, GPG is usually installed v
 When installing a new operating system, you may need to migrate GPG secret keys.<br>
 And with a clean Windows installation, you may need to customize your Git config by adding explicit references to your GPG utility and OpenPGP secret key.
 
-The following scripts have been written to automate this process:
+The following scripts have been written to automate this process:<br>
+**./**:open_file_folder:Scripts<br>
+   └── :file_folder:Windows<br>
+            ├── :page_facing_up:git_gpg_activate.ps1<br>
+            ├── :page_facing_up:gpg_export.ps1<br>
+            └── :page_facing_up:gpg_import.ps1<br>
 
 ***
 
