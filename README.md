@@ -136,9 +136,9 @@ And with a clean Windows installation, you may need to customize your Git config
 The following scripts have been written to automate this process:<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
-            ├── :page_facing_up:git_gpg_activate.ps1<br>
-            ├── :page_facing_up:gpg_export.ps1<br>
-            └── :page_facing_up:gpg_import.ps1<br>
+            ├── :page_facing_up:[git_gpg_activate.ps1](Scripts/Windows/git_gpg_activate.ps1)<br>
+            ├── :page_facing_up:[gpg_export.ps1](Scripts/Windows/gpg_export.ps1)<br>
+            └── :page_facing_up:[gpg_import.ps1](Scripts/Windows/gpg_import.ps1)<br>
 
 ### Light Windows Recovery:
 You've probably heard of the magic command "**sfc /scannow**", which will help you fix Windows system issues.<br>
@@ -150,7 +150,7 @@ And you will need to run commands with elevated privileges.
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
-            └── :page_facing_up:light_windows_recovery.ps1<br>
+            └── :page_facing_up:[light_windows_recovery.ps1](Scripts/Windows/light_windows_recovery.ps1)<br>
 
 ***
 
