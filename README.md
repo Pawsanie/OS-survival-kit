@@ -21,6 +21,9 @@ Contains information about requirements to execute scripts and how to check them
 * [Quick Start for the Technically Uninitiated](#Quick-Start-for-the-Technically-Uninitiated)
 * [Quick Start for Engineers](#Quick-Start-for-Engineers)
 
+### Windows Scripts:
+* [GPG Signature](#GPG-Signature)
+
 ___
 <br>
 
@@ -118,6 +121,18 @@ However, if you see "**False**" instead, then you need to contact your administr
     Set-ExecutionPolicy Restricted
     Set-ExecutionPolicy Restricted -Scope CurrentUser
     ```
+   
+## Windows Administration:
+
+### GPG Signature:
+**OpenPGP** secret keys are used, for example, to sign commits for GitHub.<br>
+On the client side, this process is managed using the GNU Privacy Guard (**GPG**) utilities.<br>
+In the Microsoft Windows family of operating systems, GPG is usually installed via the **Gpg4win** installer.
+
+When installing a new operating system, you may need to migrate GPG secret keys.<br>
+And with a clean Windows installation, you may need to customize your Git config by adding explicit references to your GPG utility and OpenPGP secret key.
+
+The following scripts have been written to automate this process:
 
 ***
 
