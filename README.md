@@ -26,6 +26,7 @@ Contains information about requirements to execute scripts and how to check them
 * [Light Windows Recovery](#Light-Windows-Recovery)
 * [Windows WER ReportArchive read access problems](#Windows-WER-ReportArchive-read-access-problems)
 * [Windows 11 Python cannot be invoked from CMD or PowerShell](#Windows-11-Python-cannot-be-invoked-from-CMD-or-PowerShell)
+* [Undeletable Windows.old folder](#Undeletable-Windowsold-folder)
 
 ___
 <br>
