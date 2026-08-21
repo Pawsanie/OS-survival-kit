@@ -25,6 +25,7 @@ Contains information about requirements to execute scripts and how to check them
 * [GPG Signature Management](#GPG-Signature-Management)
 * [Light Windows Recovery](#Light-Windows-Recovery)
 * [Windows WER ReportArchive read access problems](#Windows-WER-ReportArchive-read-access-problems)
+* [Windows 11 Python cannot be invoked from CMD or PowerShell](#Windows-11-Python-cannot-be-invoked-from-CMD-or-PowerShell)
 
 ___
 <br>
@@ -180,7 +181,7 @@ The whole process is already automated in the script.<br>
             └── :page_facing_up:[WER_ReportArchive_grant_read_access.ps1](Scripts/Windows/WER_ReportArchive_grant_read_access.ps1)
 <br><br>
 
-### Windows 11 Python stub:
+### Windows 11 Python cannot be invoked from CMD or PowerShell:
 
 
 ***
