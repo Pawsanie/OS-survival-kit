@@ -143,14 +143,16 @@ The following scripts have been written to automate this process:<br>
 ### Light Windows Recovery:
 You've probably heard of the magic command "**sfc /scannow**", which will help you fix Windows system issues.<br>
 The problem is that it is unlikely to help on its own without the "**DISM /RestoreHealth**" command.<br>
-The DISM utility may rely on Windows Update to obtain the required components.<br>
-And before that, you'll probably need to clear the Windows Update cache.<br>
+The DISM utility may rely on "**Windows Update**" to obtain the required components.<br>
+And before that, you'll probably need to clear the Windows Update **cache**.<br>
 And you will need to run commands with elevated privileges.
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
             └── :page_facing_up:[light_windows_recovery.ps1](Scripts/Windows/light_windows_recovery.ps1)<br>
+
+### Windows WER ReportArchive problem with read access:
 
 ***
 
