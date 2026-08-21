@@ -189,6 +189,14 @@ The whole process is already automated in the script.<br>
             └── :page_facing_up:[win_11_python_stub_devnull.ps1](Scripts/Windows/win_11_python_stub_devnull.ps1)
 <br><br>
 
+### Undeletable Windows.old folder:
+
+The whole process is already automated in the script.<br>
+**./**:open_file_folder:Scripts<br>
+   └── :file_folder:Windows<br>
+            └── :page_facing_up:[windows_old_devnull.ps1](Scripts/Windows/windows_old_devnull.ps1)
+<br><br>
+
 
 ***
 
