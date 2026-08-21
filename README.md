@@ -24,6 +24,7 @@ Contains information about requirements to execute scripts and how to check them
 ### Windows Scripts:
 * [GPG Signature](#GPG-Signature)
 * [Light Windows Recovery](#Light-Windows-Recovery)
+* [Windows WER ReportArchive read access problems](#Windows-WER-ReportArchive-read-access-problems)
 
 ___
 <br>
@@ -152,7 +153,21 @@ The whole process is already automated in the script.<br>
    └── :file_folder:Windows<br>
             └── :page_facing_up:[light_windows_recovery.ps1](Scripts/Windows/light_windows_recovery.ps1)<br>
 
-### Windows WER ReportArchive problem with read access:
+### Windows WER ReportArchive read access problems:
+Windows Error Reporting (WER) collects, stores, and may send crash information to Microsoft.<br>
+Sometimes, to diagnose or analyze problems with the operating system or individual applications,<br>
+a user may need to access the contents of the "**ReportArchive**" directory.<br>
+Due to the way file system permissions and access policies are implemented,<br>
+the necessary reports may not be accessible through File Explorer in the simplest and most natural way<br>
+on a desktop OS.<br>
+Default ReportArchive location:
+```text
+C:\ProgramData\Microsoft\Windows\WER\ReportArchive
+```
+
+With an administrator account, you can access the files through an elevated PowerShell terminal, for example.<br>
+However, entering cumbersome commands for each report is highly inconvenient.<br>
+This is especially true if you want to open a report with a non-standard text editor.
 
 ***
 
