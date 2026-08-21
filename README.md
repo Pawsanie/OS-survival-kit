@@ -169,6 +169,14 @@ With an administrator account, you can access the files through an elevated Powe
 However, entering cumbersome commands for each report is highly inconvenient.<br>
 This is especially true if you want to open a report with a non-standard text editor.
 
+It's much easier to have a script that automatically grants the current administrator full access to report folders <br>
+within ReportArchive and their contents, recursively.
+
+The whole process is already automated in the script.<br>
+**./**:open_file_folder:Scripts<br>
+   └── :file_folder:Windows<br>
+            └── :page_facing_up:[WER_ReportArchive_grant_read_access.ps1](Scripts/Windows/WER_ReportArchive_grant_read_access.ps1)
+
 ***
 
 :hearts: **Thank you** for your interest in my work! :hearts:<br><br>
