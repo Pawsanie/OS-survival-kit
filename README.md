@@ -142,7 +142,7 @@ The following scripts have been written to automate this process:<br>
 
 ### Light Windows Recovery:
 You've probably heard of the magic command "**sfc /scannow**", which will help you fix Windows system issues.<br>
-The problem is that it is unlikely to help on its own without the "DISM /RestoreHealth" command.<br>
+The problem is that it is unlikely to help on its own without the "**DISM /RestoreHealth**" command.<br>
 The DISM utility may rely on Windows Update to obtain the required components.<br>
 And before that, you'll probably need to clear the Windows Update cache.<br>
 And you will need to run commands with elevated privileges.
