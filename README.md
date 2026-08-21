@@ -47,7 +47,6 @@ and you can execute scripts from this repository.<br>
 However, if you see "**False**" instead, then you need to contact your administrator or PC owner to resolve your issue.
 
 ## Quick Start for the Technically Uninitiated
-
 1) Press the "**Win+R**" keyboard keys combination.
 2) In the window that opens, type "**PowerShell**" and press "**Ctrl+Shift+Enter**" keyboard keys combination.<br>
    Please note that this window is called "**Administrator Windows PowerShell**".
@@ -86,7 +85,6 @@ However, if you see "**False**" instead, then you need to contact your administr
 :hearts:Done: You are amazing!:hearts:
 
 ## Quick Start for Engineers
-
 1) Press the "**Win+R**" keyboard keys combination.
 2) In the window that opens, write "**PowerShell**" and press "**Ctrl+Shift+Enter**" keyboard keys combination.
 3) Check the PowerShell script execution policies for **CurrentUser** and **LocalMachine** using the command.
@@ -183,6 +181,21 @@ The whole process is already automated in the script.<br>
 <br><br>
 
 ### Windows 11 Python cannot be invoked from CMD or PowerShell:
+For engineers running their automation scripts written in Python<br>
+or users learning this programming language,<br>
+it is sometimes natural to launch a program from a **CMD** or **PowerShell** terminal rather than from an IDE.
+
+By default, in **Windows 11**,<br>
+if you want to call Python from CMD or PowerShell in this way,<br>
+you will encounter some fantastic OS behavior.
+
+Namely, regardless of whether Python is installed or where and how it was installed,<br>
+running the "**python**" command will always open the corresponding page in the **Microsoft Store**.
+
+
+```text
+C:\Users\<UserName>\AppData\Local\Microsoft\WindowsApps
+```
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
