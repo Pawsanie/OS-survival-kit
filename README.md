@@ -4,7 +4,7 @@ The repository contains and will be slowly updated with scripts that solve obscu
 in the practical operation of personal computer operating systems,<br>
 the investigation and resolution of which can take hours.
 
-:wink:Cloning without to give it a :star:? Nah, I’m not that lazy.:wink:
+:wink:Cloning without giving it a :star:? Nah, I’m not that lazy.:wink:
 
 ## Disclaimer:
 :warning:**Using** some or all of the elements of this code, **You** assume **responsibility for any consequences!**<br>
