@@ -200,7 +200,8 @@ C:\Users\<UserName>\AppData\Local\Microsoft\WindowsApps
 If the OS is running normally and installed correctly, this shouldn't happen.<br>
 Python installed from the Microsoft Store is configured correctly by default,<br>
 while the installer adds the required PATH when the appropriate option is selected.<br>
-However, during migrations from Windows 10 to 11, as well as in other rare cases, this often stops working as intended.
+However, during migrations from Windows 10 to 11 or after a previous installation,<br>
+as well as in other rare cases, this often stops working as intended.
 
 To solve this problem, simply delete the **stub** python EXE files.<br>
 The whole process is already automated in the script.<br>
