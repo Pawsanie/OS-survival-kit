@@ -190,12 +190,17 @@ if you want to call Python from CMD or PowerShell in this way,<br>
 you will encounter some fantastic OS behavior.
 
 Namely, regardless of whether Python is installed or where and how it was installed,<br>
-running the "**python**" command will always open the corresponding page in the **Microsoft Store**.
+running the "**python**" command will always open the corresponding page in the **Microsoft Store**.<br>
+When used inside scripts, however, it simply writes its name.
 
-
+This happens because instead of the normal python.exe launch stub App Execution Aliases from the folder:
 ```text
 C:\Users\<UserName>\AppData\Local\Microsoft\WindowsApps
 ```
+If the OS is running normally and installed correctly, this shouldn't happen.<br>
+Python installed from the Microsoft Store is configured correctly by default,<br>
+while the installer adds the required PATH when the appropriate option is selected.<br>
+However, during migrations from Windows 10 to 11, as well as in other rare cases, this often stops working as intended.
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
