@@ -211,6 +211,10 @@ The whole process is already automated in the script.<br>
 <br><br>
 
 ### Undeletable Windows.old folder:
+When you try to select the "**Windows.old**" folder and delete it,<br>
+you will find that after a moment of consideration,<br>
+the operating system will refuse to let you do so, even if you have opened Explorer as an administrator.
+
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
