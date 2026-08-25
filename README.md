@@ -238,7 +238,7 @@ But this is not the only problem, so there is no point in addressing this specif
 The problem is that you can't delete this folder using the "**Remove-Item**" cmdlet even from PowerShell running with elevated privileges.
 
 The reason for this is that a significant portion of file system objects<br>
-within the directory of interest owned by the system account "NT AUTHORITY|SYSTEM" or other technical accounts<br>
+within the directory of interest owned by the system account "NT AUTHORITY\SYSTEM" or other technical accounts<br>
 with corresponding access restrictions.
 
 Therefore, you must first recursively acquire ownership of the entire contents<br>
