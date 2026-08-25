@@ -234,11 +234,11 @@ So why can't you delete this folder in the most natural way for a Windows user?
 This happens because even when running as administrator,<br>
 File Explorer and PowerShell provide different capabilities for working<br>
 with protected file system objects.<br>
-But this is not the only problem, so there is no point in fixing this specifically.<br>
+But this is not the only problem, so there is no point in addressing this specifically.<br>
 The problem is that you can't delete this folder using the "**Remove-Item**" cmdlet even from PowerShell running with elevated privileges.
 
 The reason for this is that a significant portion of file system objects<br>
-within the directory of interest belong to the system account "NT AUTHORITY|SYSTEM" or other technical accounts<br>
+within the directory of interest owned by the system account "NT AUTHORITY|SYSTEM" or other technical accounts<br>
 with corresponding access restrictions.
 
 Therefore, you must first recursively acquire ownership of the entire contents<br>
