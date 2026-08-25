@@ -215,6 +215,21 @@ When you try to select the "**Windows.old**" folder and delete it,<br>
 you will find that after a moment of consideration,<br>
 the operating system will refuse to let you do so, even if you have opened Explorer as an administrator.
 
+This happens because Windows 11 is designed to delete it first, using "**Settings** -> **System** -> **Storage**". <br>
+However, you most likely won't find anything there, <br>
+so if the operating system is running normally, you can and should use the built-in "**Disk Cleanup**" utility,<br>
+using the following steps:
+1) Open the "**Run**" window using the "**Win+R**" combination.
+2) Type "**cleanmgr**" and press "**Enter**".
+3) Select the disk where the OS is installed.
+4) In the window that opens, click the "**Clean up system files**" button.
+5) Select the Windows disk again.
+6) In the list, find the checkbox "**Previous Windows installations**" and check it.
+7) Confirm deletion.
+
+However, in some cases involving migration from Windows 10 to Windows 11,<br>
+or in rare cases after reinstalling Windows, none of the above methods will help.<br>
+So why can't you delete this folder in the most natural way for a Windows user?
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
