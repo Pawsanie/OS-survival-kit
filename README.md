@@ -246,7 +246,7 @@ of the "Windows.old" folder using the "**takeown**" utility.<br>
 Then grant yourself the necessary permissions to their contents by the "**icacls**" utility.
 
 However, even if we ignore the fact that this is just a sequence of commands, it will appear to be doing nothing for a long time.<br>
-The problem is that this process will take an INORDINATELY LONG time,<br>
+The problem is that this process will take an **INORDINATELY LONG** time,<br>
 while the directory will remain untouched until the preceding commands have completed.
 
 Therefore, it would be better to delete the files and folders from the deepest level back to the root,<br>
