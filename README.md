@@ -215,7 +215,7 @@ When you try to select the "**Windows.old**" folder and delete it,<br>
 you will find that after a moment of consideration,<br>
 the operating system will refuse to let you do so, even if you have opened Explorer as an administrator.
 
-This happens because Windows 11 is designed to delete it first, using "**Settings** -> **System** -> **Storage**".<br>
+This happens because Windows 11 expects this folder to be removed first through "**Settings** -> **System** -> **Storage**".<br>
 However, you most likely won't find anything there,<br>
 so if the operating system is running normally, you can and should use the built-in "**Disk Cleanup**" utility,<br>
 using the following steps:
@@ -238,7 +238,7 @@ But this is not the only problem, so there is no point in addressing this specif
 The problem is that you can't delete this folder using the "**Remove-Item**" cmdlet even from PowerShell running with elevated privileges.
 
 The reason for this is that a significant portion of file system objects<br>
-within the directory of interest owned by the system account "NT AUTHORITY\SYSTEM" or other technical accounts<br>
+within the directory of interest are owned by the system account "NT AUTHORITY\SYSTEM" or other technical accounts<br>
 with corresponding access restrictions.
 
 Therefore, you must first recursively acquire ownership of the entire contents<br>
