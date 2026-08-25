@@ -248,7 +248,7 @@ Then grant yourself the necessary permissions to their contents by the "**icacls
 But in addition to all of the above, "Remove-Item" may have problems with removing "hard links".<br>
 To delete them, you will need to use the ".NET API" method "[System.IO.File]::Delete".
 
-However, even if we ignore the fact that this is just a sequence of commands, it will appear to be doing nothing for a long time.<br>
+However, if we abstract from this and simply execute the sequence of commands, it will appear to be doing nothing for a long time.<br>
 The problem is that this process will take an **INORDINATELY LONG** time,<br>
 while the directory will remain untouched until the preceding commands have completed.
 
