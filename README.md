@@ -215,8 +215,8 @@ When you try to select the "**Windows.old**" folder and delete it,<br>
 you will find that after a moment of consideration,<br>
 the operating system will refuse to let you do so, even if you have opened Explorer as an administrator.
 
-This happens because Windows 11 is designed to delete it first, using "**Settings** -> **System** -> **Storage**". <br>
-However, you most likely won't find anything there, <br>
+This happens because Windows 11 is designed to delete it first, using "**Settings** -> **System** -> **Storage**".<br>
+However, you most likely won't find anything there,<br>
 so if the operating system is running normally, you can and should use the built-in "**Disk Cleanup**" utility,<br>
 using the following steps:
 1) Open the "**Run**" window using the "**Win+R**" combination.
@@ -227,9 +227,30 @@ using the following steps:
 6) In the list, find the checkbox "**Previous Windows installations**" and check it.
 7) Confirm deletion.
 
-However, in some cases involving migration from Windows 10 to Windows 11,<br>
+However, in some cases involving migration from Windows 10 to 11,<br>
 or in rare cases after reinstalling Windows, none of the above methods will help.<br>
 So why can't you delete this folder in the most natural way for a Windows user?
+
+This happens because even when running as administrator,<br>
+File Explorer and PowerShell provide different capabilities for working<br>
+with protected file system objects.<br>
+But this is not the only problem, so there is no point in fixing this specifically.<br>
+The problem is that you can't delete this folder using the "**Remove-Item**" cmdlet even from PowerShell running with elevated privileges.
+
+The reason for this is that a significant portion of file system objects<br>
+within the directory of interest belong to the system account "NT AUTHORITY|SYSTEM" or other technical accounts<br>
+with corresponding access restrictions.
+
+Therefore, you must first recursively acquire ownership of the entire contents<br>
+of the "Windows.old" folder using the "**takeown**" utility.<br>
+Then grant yourself the necessary permissions to their contents by the "**icacls**" utility.
+
+However, even if we ignore the fact that this is just a sequence of commands, it will appear to be doing nothing for a long time.<br>
+The problem is that this process will take an INORDINATELY LONG time,<br>
+while the directory will remain untouched until the preceding commands have completed.
+
+Therefore, it would be better to delete the files and folders from the deepest level back to the root,<br>
+processing independent branches in parallel via multithreading.
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
