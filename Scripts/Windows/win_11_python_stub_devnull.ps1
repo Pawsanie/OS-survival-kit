@@ -34,61 +34,104 @@ $folders = @(
     "$env:WINDIR\AppInstaller"
 )
 
-foreach ($folder in $folders) {
-    if (Test-Path $folder) {
+<#
+.SYNOPSIS
+Devnull Windows Python stubs EXE files.
+#>
+function Remove-Python-Stubs {
+    foreach ($folder in $folders) {
+        if (Test-Path $folder) {
 
-        Get-ChildItem `
-            -Path $folder `
-            -Include "python*.exe",
-                "python*.lnk",
-                "python*.appref-ms" `
-            -File `
-            -Recurse `
-            -ErrorAction SilentlyContinue `
-            | ForEach-Object {
+            Get-ChildItem `
+                -Path $folder `
+                -Include `
+                    "python*.exe",
+                    "python*.lnk",
+                    "python*.appref-ms" `
+                -File `
+                -Recurse `
+                -ErrorAction SilentlyContinue `
+                | ForEach-Object {
 
-                try {
+                    try {
 
-                    if (
-                        $_.Attributes `
-                            -band [System.IO.FileAttributes]::ReadOnly
-                    ) {
+                        if (
+                            $_.Attributes `
+                                -band [System.IO.FileAttributes]::ReadOnly
+                        ) {
 
-                        $_.Attributes = 'Normal'
+                            $_.Attributes = 'Normal'
+
+                        }
+
+                        Remove-Item `
+                            -LiteralPath $_.FullName `
+                            -Force `
+                            -ErrorAction Stop
+
+                        Write-Host `
+                            "Deleted: $($_.FullName)" `
+                            -ForegroundColor White
+
+                    }
+                    catch {
+
+                        Write-Warning `
+                            "Failed to delete $($_.FullName): $_"
 
                     }
 
-                    Remove-Item `
-                        -LiteralPath $_.FullName `
-                        -Force `
-                        -ErrorAction Stop
-
-                    Write-Host `
-                        "Deleted: $($_.FullName)"
-
-                }
-                catch {
-
-                    Write-Warning `
-                        "Failed to delete $($_.FullName): $_"
-
                 }
 
-            }
+        }
+
     }
+
 }
 
-try {
+<#
+.SYNOPSIS
+Checks if Python is registered in the PATH.
+#>
+function Test-Python {
+
+    try {
+
+        Write-Host `
+            "Checking 'where python':" `
+            -ForegroundColor Green
+            & where.exe python 2>$null `
+            | ForEach-Object { Write-Host "  $_" }
+
+    }
+    catch {
+
+        Write-Host `
+            "Failed to execute 'where python': $_" `
+            -ForegroundColor Yellow
+
+    }
+
+}
+
+<#
+.SYNOPSIS
+Runs devnull Windows Python stubs EXE files pipeline.
+#>
+function Main {
 
     Write-Host `
-        "`nChecking 'where python':"
-        & where.exe python 2>$null `
-        | ForEach-Object { Write-Host "  $_" }
+        "Windows Python EXE stubs devnull script has been launched." `
+        -ForegroundColor White
+
+    Test-Python
+    Remove-Python-Stubs
+
+    Write-Host `
+        "Windows Python EXE stubs devnull scenario completed." `
+        -ForegroundColor Blue
 
 }
-catch {
 
-    Write-Warning `
-        "Failed to execute 'where python': $_"
-
-}
+# Entry point:
+Main
