@@ -93,7 +93,7 @@ function Remove-Python-Stubs {
 .SYNOPSIS
 Checks if Python is registered in the PATH.
 #>
-function Test-Python {
+function Test-Python-Application {
 
     try {
 
@@ -124,7 +124,7 @@ function Main {
         "Windows Python EXE stubs devnull script has been launched." `
         -ForegroundColor White
 
-    Test-Python
+    Test-Python-Application
     Remove-Python-Stubs
 
     Write-Host `
