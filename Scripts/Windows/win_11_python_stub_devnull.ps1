@@ -124,8 +124,8 @@ function Main {
         "Windows Python EXE stubs devnull script has been launched." `
         -ForegroundColor White
 
-    Test-Python-Application
     Remove-Python-Stubs
+    Test-Python-Application
 
     Write-Host `
         "Windows Python EXE stubs devnull scenario completed." `
