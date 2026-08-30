@@ -15,6 +15,7 @@ if (
         [Security.Principal.WindowsBuiltInRole]::Administrator
     )
 ) {
+
     Start-Process powershell `
         -Verb RunAs `
         -ArgumentList @(
@@ -26,6 +27,7 @@ if (
             $PSCommandPath
     )
     exit
+
 }
 
 # Path settings:

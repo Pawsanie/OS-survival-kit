@@ -15,6 +15,7 @@ if (
         [Security.Principal.WindowsBuiltInRole]::Administrator
     )
 ) {
+
     Start-Process powershell `
         -Verb RunAs `
         -ArgumentList @(
@@ -25,6 +26,7 @@ if (
             $PSCommandPath
     )
     exit
+
 }
 
 # Path settings:
@@ -92,9 +94,11 @@ function Get-Files-Tree {
              }
 
              else {
+
                      $FilesQueue.Enqueue(
                             $Item.FullName
                 )
+
              }
 
              Write-Host `
@@ -105,10 +109,12 @@ function Get-Files-Tree {
         }
 
         catch {
+
             Write-Host `
                 "Failed to add path to multithreaded processing queue!`n" `
                 "Item path: '$($Item.FullName)'" `
                 -ForegroundColor Red
+
         }
 
 
@@ -135,14 +141,18 @@ function Remove-File-System-Item {
                 -Force
         ).PSIsContainer
     ) {
+
         [System.IO.Directory]::Delete(
                 $Path
         )
+
     }
     else {
+
         [System.IO.File]::Delete(
                 $Path
         )
+
     }
 
 }
@@ -216,11 +226,15 @@ function Task {
     )
 
     try {
+
         try {
+
             Remove-File-System-Item `
                 -Path $Path
+
         }
         catch {
+
             $LogsQueue.Enqueue(
                 [PSCustomObject]@{
                     Message = "Access denied!`n" `
@@ -236,6 +250,7 @@ function Task {
 
             Remove-File-System-Item `
                 -Path $Path
+
         }
 
         $LogsQueue.Enqueue(
@@ -245,9 +260,10 @@ function Task {
                 Color = [ConsoleColor]::Green
             }
         )
-    }
 
+    }
     catch {
+
         $LogsQueue.Enqueue(
             [PSCustomObject]@{
                 Message = "Failed to delete file system item!`n" `
@@ -256,6 +272,7 @@ function Task {
                 Color = [ConsoleColor]::Red
             }
         )
+
     }
 
 }
@@ -349,7 +366,9 @@ function Start-Workers {
         )
 
         foreach ($functionStr in $Functions) {
+
             Invoke-Expression $functionStr
+
         }
 
         while ($true) {
@@ -360,7 +379,9 @@ function Start-Workers {
                         [ref]$CurrentPath
                 )
             ) {
+
                 break
+
             }
 
             Task `
@@ -453,18 +474,22 @@ function Remove-WindowsOLD {
         -FilesQueue $FilesQueue
 
     try {
+
         Remove-File-System-Item `
             -Path $TargetPath
 
         Write-Host `
             "Windows.old deleted successfully." `
             -ForegroundColor Green
+
     }
 
     catch {
+
         Write-Host `
             "Failed to delete the Windows.old completely!" `
             -ForegroundColor Red
+
     }
 
 }
@@ -480,14 +505,18 @@ function Main {
         -ForegroundColor White
 
     if (Test-Path $TargetPath) {
+
         Remove-WindowsOLD
+
     }
 
     else {
+
         Write-Host `
             "Unable to locate Windows.old!`n" `
             "Directory path: '$TargetPath'" `
             -ForegroundColor Blue
+
     }
 
     Write-Host `
