@@ -26,6 +26,7 @@ if (
             '-File',
             $PSCommandPath
     )
+
     exit
 
 }
