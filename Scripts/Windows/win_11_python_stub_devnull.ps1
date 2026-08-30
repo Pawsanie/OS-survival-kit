@@ -93,22 +93,63 @@ function Remove-Python-Stubs {
 .SYNOPSIS
 Checks if Python is registered in the PATH.
 #>
-function Test-Python-Application {
+function Test-Python-Path {
 
     try {
 
-        Write-Host `
-            "Checking 'where python':" `
-            -ForegroundColor Green
-            & where.exe python 2>$null `
-            | ForEach-Object { Write-Host "  $_" }
+        if (
+            $pythonPaths = & where.exe python 2>$null
+        ) {
+
+            Write-Host `
+                "Checking 'where python':" `
+                -ForegroundColor Green
+
+            $pythonPaths | ForEach-Object {
+
+                Write-Host `
+                    "$_" `
+                    -ForegroundColor White
+
+            }
+
+        }
+        else {
+
+            Write-Host `
+                "Python EXE do not found." `
+                -ForegroundColor Yellow
+
+        }
 
     }
     catch {
 
         Write-Host `
-            "Failed to execute 'where python': $_" `
-            -ForegroundColor Yellow
+            "Failed to execute 'where python'!" `
+            -ForegroundColor Red
+
+    }
+
+}
+
+<#
+.SYNOPSIS
+Checks if Python is available to call.
+#>
+function Test-Python-Application {
+
+    try {
+
+        python `
+            --version
+
+        return $True
+
+    }
+    catch {
+
+        return $False
 
     }
 
@@ -124,8 +165,33 @@ function Main {
         "Windows Python EXE stubs devnull script has been launched." `
         -ForegroundColor White
 
-    Remove-Python-Stubs
-    Test-Python-Application
+    Write-Host `
+        "Checking Python EXE availability for invocation." `
+        -ForegroundColor White
+
+    if (
+        -not (Test-Python-Application)
+    ) {
+
+        Write-Host `
+            "Unable to invocate Python EXE: remove stubs." `
+            -ForegroundColor White
+
+        Remove-Python-Stubs
+
+    }
+    else {
+
+        Write-Host `
+            "Stubs do not interfere with invocate Python EXE." `
+            -ForegroundColor Green
+
+        python `
+            --version
+
+    }
+
+    Test-Python-Path
 
     Write-Host `
         "Windows Python EXE stubs devnull scenario completed." `
