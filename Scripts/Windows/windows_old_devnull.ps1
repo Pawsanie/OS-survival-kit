@@ -475,8 +475,10 @@ function Remove-WindowsOLD {
 
     try {
 
-        Remove-File-System-Item `
-            -Path $TargetPath
+        Remove-Item `
+            -LiteralPath $TargetPath `
+            -Recurse `
+            -Force
 
         Write-Host `
             "Windows.old deleted successfully." `
