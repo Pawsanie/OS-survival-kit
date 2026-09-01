@@ -263,7 +263,7 @@ function Remove-Pre-installed-Apps {
             "Microsoft.BingSports",
             "Microsoft.People", # Contacts (Legacy)
             "Microsoft.SkypeApp",   # Skype (Legacy)
-            "Microsoft.Todos",  # To Do
+            "Microsoft.Todos",  # To Do list
             "Microsoft.OneConnect", # Mobile Plans
             "Microsoft.MixedReality.Portal",    # Mixed Reality
             "Microsoft.Whiteboard",  # Whiteboard
@@ -272,7 +272,7 @@ function Remove-Pre-installed-Apps {
             "Microsoft.MicrosoftOfficeHub", # Office Hub (MS Office Advertising)
             "Microsoft.MicrosoftSolitaireCollection",   # Solitaire with Advertising
             "Clipchamp.Clipchamp",  # Clipchamp (video editor, Advertising)
-            "Microsoft.Advertising.Xaml",   # Reclame SDK
+            "Microsoft.Advertising.Xaml",   # Advertising SDK
 
             # Virtual hard links to third-party services:
             "SpotifyAB.SpotifyMusic",
