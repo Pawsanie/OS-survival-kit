@@ -32,6 +32,10 @@ if (
 
 }
 
+<#
+.SYNOPSIS
+Disables telemetry dependent on registry policies.
+#>
 function Set-Telemetry-Registry-Policies {
 
     New-Item `
@@ -49,6 +53,10 @@ function Set-Telemetry-Registry-Policies {
 
 }
 
+<#
+.SYNOPSIS
+Stops telemetry services.
+#>
 function Stop-Telemetry-Services {
 
     Stop-Service diagtrack `
@@ -65,6 +73,10 @@ function Stop-Telemetry-Services {
 
 }
 
+<#
+.SYNOPSIS
+Clears a significant portion of telemetry from the task list.
+#>
 function Clear-telemetry-Tasks {
 
     foreach (
@@ -91,6 +103,10 @@ function Clear-telemetry-Tasks {
 
 }
 
+<#
+.SYNOPSIS
+Disables Reclame and News widgets.
+#>
 function Set-Reclame-And-CloudContent-Registry-Policies {
 
     foreach (
@@ -151,6 +167,10 @@ function Set-Reclame-And-CloudContent-Registry-Policies {
 
 }
 
+<#
+.SYNOPSIS
+Turns off cloud dynamic wallpapers.
+#>
 function Set-Wallpaper-Spotlight-Registry-Policies {
 
     foreach (
@@ -172,6 +192,11 @@ function Set-Wallpaper-Spotlight-Registry-Policies {
 
 }
 
+
+<#
+.SYNOPSIS
+Removes the feed from the Start Menu search.
+#>
 function Set-Windows-Search-Highlights-Registry-Policies {
 
     New-ItemProperty `
