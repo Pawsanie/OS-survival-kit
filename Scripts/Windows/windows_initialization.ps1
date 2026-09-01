@@ -199,11 +199,36 @@ Removes the feed from the Start Menu search.
 #>
 function Set-Windows-Search-Highlights-Registry-Policies {
 
-    New-ItemProperty `
+    foreach (
+        $key in @(
+            "EnableAllowedToQueryHighlights",
+            "ConnectedSearchUseWeb"
+        )
+    ) {
+
+        Set-ItemProperty `
+            -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" `
+            -Name $key `
+            -Type DWord `
+            -Value 0 `
+            -Force `
+            | Out-Null
+
+    }
+
+    Set-ItemProperty `
         -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" `
-        -Name "EnableAllowedToQueryHighlights" `
+        -Name "DisableWebSearch" `
+        -Value 1 `
+        -Type DWord `
+        -Force `
+        | Out-Null
+
+    Set-ItemProperty `
+        -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" `
+        -Name "BingSearchEnabled" `
         -Value 0 `
-        -PropertyType DWord `
+        -Type DWord `
         -Force `
         | Out-Null
 
@@ -228,6 +253,12 @@ function Main {
 
     # Search News and Highlights:
     Set-Windows-Search-Highlights-Registry-Policies
+
+    # Apply changes that do not require a system restart:
+    Stop-Process `
+        -Name explorer `
+        -Force
+    Start-Process explorer
 
 }
 
