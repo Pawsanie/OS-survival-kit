@@ -91,7 +91,7 @@ function Clear-telemetry-Tasks {
 
 }
 
-function Set-Reclame-Registry-Policies {
+function Set-Reclame-And-CloudContent-Registry-Policies {
 
     foreach (
         $path in @(
@@ -195,8 +195,8 @@ function Main {
     Stop-Telemetry-Services
     Clear-telemetry-Tasks
 
-    # Reclame:
-    Set-Reclame-Registry-Policies
+    # Reclame and CloudContent:
+    Set-Reclame-And-CloudContent-Registry-Policies
 
     # Wallpapers:
     Set-Wallpaper-Spotlight-Registry-Policies
