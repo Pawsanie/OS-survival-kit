@@ -308,6 +308,10 @@ Runs Windows initialization pipeline.
 #>
 function Main {
 
+    Write-Host `
+        "Post-installation Windows initialization script has been launched."`
+        -ForegroundColor White
+
     # Telemetry:
     Set-Telemetry-Registry-Policies
     Stop-Telemetry-Services
@@ -330,6 +334,10 @@ function Main {
         -Name explorer `
         -Force
     Start-Process explorer
+
+    Write-Host `
+        "Post-installation Windows initialization scenario completed." `
+        -ForegroundColor Blue
 
 }
 
