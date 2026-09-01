@@ -107,7 +107,7 @@ function Clear-telemetry-Tasks {
 .SYNOPSIS
 Disables Reclame and News widgets.
 #>
-function Set-Reclame-And-CloudContent-Registry-Policies {
+function Set-Advertising-And-CloudContent-Registry-Policies {
 
     foreach (
         $path in @(
@@ -268,10 +268,10 @@ function Remove-Pre-installed-Apps {
             "Microsoft.MixedReality.Portal",    # Mixed Reality
             "Microsoft.Whiteboard",  # Whiteboard
 
-            # Reclame:
-            "Microsoft.MicrosoftOfficeHub", # Office Hub (MS Office Reclame)
-            "Microsoft.MicrosoftSolitaireCollection",   # Solitaire with Reclame
-            "Clipchamp.Clipchamp",  # Clipchamp (video editor, Reclame)
+            # Advertising:
+            "Microsoft.MicrosoftOfficeHub", # Office Hub (MS Office Advertising)
+            "Microsoft.MicrosoftSolitaireCollection",   # Solitaire with Advertising
+            "Clipchamp.Clipchamp",  # Clipchamp (video editor, Advertising)
             "Microsoft.Advertising.Xaml",   # Reclame SDK
 
             # Virtual hard links to third-party services:
@@ -313,8 +313,8 @@ function Main {
     Stop-Telemetry-Services
     Clear-telemetry-Tasks
 
-    # Reclame and CloudContent:
-    Set-Reclame-And-CloudContent-Registry-Policies
+    # Advertising and CloudContent:
+    Set-Advertising-And-CloudContent-Registry-Policies
 
     # Wallpapers:
     Set-Wallpaper-Spotlight-Registry-Policies
