@@ -304,6 +304,27 @@ function Remove-Pre-installed-Apps {
 
 <#
 .SYNOPSIS
+Prevents the remote Xbox piece from being called every time the game is opened.
+#>
+function Disable-Gaming-Overlay {
+
+    New-Item `
+        -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" `
+        -Force `
+        | Out-Null
+
+    New-ItemProperty `
+        -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" `
+        -Name "AllowGameDVR" `
+        -PropertyType DWord `
+        -Value 0 `
+        -Force `
+        | Out-Null
+
+}
+
+<#
+.SYNOPSIS
 Runs Windows initialization pipeline.
 #>
 function Main {
@@ -328,6 +349,7 @@ function Main {
 
     # Apps:
     Remove-Pre-installed-Apps
+    Disable-Gaming-Overlay
 
     # Apply changes that do not require a system restart:
     Stop-Process `
