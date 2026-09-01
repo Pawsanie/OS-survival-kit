@@ -212,6 +212,15 @@ The whole process is already automated in the script.<br>
 <br><br>
 
 ### Post-installation Windows initialization:
+Immediately after installation, Windows contains a truckload of unnecessary software, telemetry and ads.<br>
+Users with powerful computers are simply irritated by advertising messages.<br>
+Those with weaker machines may also be disappointed by the fact <br>
+that all pre-installed stuff consumes a significant amount of system resources.<br>
+Almost as much as an average older game.
+
+To fix this, you'll have to stop several services,<br>
+remove tons of applications,<br>
+and rewrite a whole mountain of registry keys and policies.
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
