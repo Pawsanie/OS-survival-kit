@@ -316,7 +316,7 @@ function Disable-Gaming-Overlay {
     New-ItemProperty `
         -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" `
         -Name "AllowGameDVR" `
-        -PropertyType DWord `
+        -Type DWord `
         -Value 0 `
         -Force `
         | Out-Null
