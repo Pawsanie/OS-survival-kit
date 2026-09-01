@@ -236,6 +236,74 @@ function Set-Windows-Search-Highlights-Registry-Policies {
 
 <#
 .SYNOPSIS
+Removes unnecessary and reclame pre-installed applications.
+#>
+function Remove-Pre-installed-Apps {
+
+    foreach (
+        $app in @(
+            # X-box:
+            "Microsoft.XboxApp",
+            "Microsoft.Xbox.TCUI",
+            "Microsoft.XboxGameOverlay",
+            "Microsoft.XboxGamingOverlay",
+            "Microsoft.XboxIdentityProvider",
+            "Microsoft.XboxSpeechToTextOverlay",
+            "Microsoft.GamingApp",  # New X-box app.
+
+            # Microsoft applications that are not OS part:
+            "Microsoft.YourPhone",  # Reading SMS, push notifications and receiving calls from your smartphone.
+            "Microsoft.GetHelp",
+            "Microsoft.Getstarted",
+            "Microsoft.ZuneMusic",  # Groove Music (Legacy)
+            "Microsoft.ZuneVideo",  # Movies & TV
+            "Microsoft.BingNews",
+            "Microsoft.BingWeather",
+            "Microsoft.BingFinance",
+            "Microsoft.BingSports",
+            "Microsoft.People", # Contacts (Legacy)
+            "Microsoft.SkypeApp",   # Skype (Legacy)
+            "Microsoft.Todos",  # To Do
+            "Microsoft.OneConnect", # Mobile Plans
+            "Microsoft.MixedReality.Portal",    # Mixed Reality
+            "Microsoft.Whiteboard",  # Whiteboard
+
+            # Reclame:
+            "Microsoft.MicrosoftOfficeHub", # Office Hub (MS Office Reclame)
+            "Microsoft.MicrosoftSolitaireCollection",   # Solitaire with Reclame
+            "Clipchamp.Clipchamp",  # Clipchamp (video editor, Reclame)
+            "Microsoft.Advertising.Xaml",   # Reclame SDK
+
+            # Virtual hard links to third-party services:
+            "SpotifyAB.SpotifyMusic",
+            "Disney.37853FC22B2CE", # Disney+
+            "Facebook.Facebook",
+            "Instagram.Instagram",
+            "TikTok.TikTok"
+        )
+    ) {
+
+        Get-AppxPackage `
+            -Name $app `
+            -AllUsers `
+            | Remove-AppxPackage `
+                -AllUsers `
+                -ErrorAction SilentlyContinue
+
+        Get-AppxProvisionedPackage `
+            -Online `
+            | Where-Object DisplayName `
+                -like "$app*" `
+                | Remove-AppxProvisionedPackage `
+                -Online `
+                -ErrorAction SilentlyContinue
+
+    }
+
+}
+
+<#
+.SYNOPSIS
 Runs Windows initialization pipeline.
 #>
 function Main {
@@ -253,6 +321,9 @@ function Main {
 
     # Search News and Highlights:
     Set-Windows-Search-Highlights-Registry-Policies
+
+    # Apps:
+    Remove-Pre-installed-Apps
 
     # Apply changes that do not require a system restart:
     Stop-Process `
