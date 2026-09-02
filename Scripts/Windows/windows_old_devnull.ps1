@@ -93,7 +93,6 @@ function Get-Files-Tree {
                          $Item.FullName
                 )
              }
-
              else {
 
                      $FilesQueue.Enqueue(
@@ -108,7 +107,6 @@ function Get-Files-Tree {
                 -ForegroundColor White
 
         }
-
         catch {
 
             Write-Host `
@@ -440,12 +438,16 @@ function Start-Workers {
 
         foreach ($PSTask in $PowerShellTasks) {
             try {
+
                 $PSTask.PowerShell.EndInvoke(
                         $PSTask.Handle
                 )
+
             }
             finally {
+
                 $PSTask.PowerShell.Dispose()
+
             }
         }
 
@@ -486,7 +488,6 @@ function Remove-WindowsOLD {
             -ForegroundColor Green
 
     }
-
     catch {
 
         Write-Host `
@@ -512,7 +513,6 @@ function Main {
         Remove-WindowsOLD
 
     }
-
     else {
 
         Write-Host `
