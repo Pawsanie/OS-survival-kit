@@ -39,7 +39,7 @@ Disables telemetry dependent on registry policies.
 function Set-Telemetry-Registry-Policies {
 
     Write-Host `
-        "Disabling telemetry registry policies."`
+        "Disabling telemetry registry policies." `
         -ForegroundColor White
 
     New-Item `
@@ -64,7 +64,7 @@ Stops telemetry services.
 function Stop-Telemetry-Services {
 
     Write-Host `
-        "Stoping telemetry services."`
+        "Stoping telemetry services." `
         -ForegroundColor White
 
     Stop-Service diagtrack `
@@ -88,7 +88,7 @@ Clears a significant portion of telemetry from the task list.
 function Clear-Telemetry-Tasks {
 
     Write-Host `
-        "Clearing telemetry Windows tasks."`
+        "Clearing telemetry Windows tasks." `
         -ForegroundColor White
 
     foreach (
@@ -122,7 +122,7 @@ Disables Advertising and News widgets.
 function Set-Advertising-And-CloudContent-Registry-Policies {
 
     Write-Host `
-        "Disableing Advertising and News widgets."`
+        "Disableing Advertising and News widgets." `
         -ForegroundColor White
 
     foreach (
@@ -172,7 +172,7 @@ function Set-Advertising-And-CloudContent-Registry-Policies {
     ) {
 
         Set-ItemProperty `
-            -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"`
+            -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" `
             -Name $key `
             -Type DWord `
             -Value 1 `
@@ -190,7 +190,7 @@ Turns off cloud dynamic wallpapers.
 function Set-Wallpaper-Spotlight-Registry-Policies {
 
     Write-Host `
-        "Disableing the cloud dynamic Wallpapers."`
+        "Disableing the cloud dynamic Wallpapers." `
         -ForegroundColor White
 
     foreach (
@@ -220,7 +220,7 @@ Removes the feed from the Start Menu search.
 function Set-Windows-Search-Highlights-Registry-Policies {
 
     Write-Host `
-        "Disableing the Start Menu search Feed."`
+        "Disableing the Start Menu search Feed." `
         -ForegroundColor White
 
     New-Item `
@@ -317,7 +317,7 @@ function Remove-Pre-installed-Apps {
     ) {
 
         Write-Host `
-        "Attempt to remove: $app"`
+        "Attempt to remove: $app" `
         -ForegroundColor White
 
         Get-AppxPackage `
@@ -372,7 +372,7 @@ Apply changes that do not require a system restart.
 function Restart-Explorer-Process {
 
     Write-Host `
-        "Attempting to restart the file Explorer process."`
+        "Attempting to restart the file Explorer process." `
         -ForegroundColor White
 
     Stop-Process `

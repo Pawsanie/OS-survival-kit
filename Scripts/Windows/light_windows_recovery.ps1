@@ -74,7 +74,8 @@ function Clear-Windows-Update-Cache {
         -Name $windowsUpdateServices
 
     foreach ($serviceName in $windowsUpdateServices) {
-        $service = Get-Service -Name $serviceName
+        $service = Get-Service `
+            -Name $serviceName
 
         $service.WaitForStatus(
             [System.ServiceProcess.ServiceControllerStatus]::Running
