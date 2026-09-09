@@ -31,8 +31,8 @@ if (
 }
 
 Write-Host `
-    "WER reports permissions update script has been launched."`
-    -ForegroundColor White
+    "WER reports permissions update script has been launched." `
+    -ForegroundColor Blue
 
 Get-ChildItem `
     -LiteralPath "$env:ProgramFiles\Microsoft\Windows\WER\ReportArchive" `

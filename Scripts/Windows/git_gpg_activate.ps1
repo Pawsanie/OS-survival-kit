@@ -132,8 +132,8 @@ Runs Git GPG signing activation pipeline.
 function Main {
 
     Write-Host `
-        "The GPG signing activation script has been launched."`
-        -ForegroundColor White
+        "The GPG signing activation script has been launched." `
+        -ForegroundColor Blue
 
     try {
 

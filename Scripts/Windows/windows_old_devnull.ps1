@@ -505,8 +505,8 @@ Runs devnull Windows.old pipeline.
 function Main {
 
     Write-Host `
-        "The Windows.old directory deletion script has been launched."`
-        -ForegroundColor White
+        "The Windows.old directory deletion script has been launched." `
+        -ForegroundColor Blue
 
     if (Test-Path $TargetPath) {
 

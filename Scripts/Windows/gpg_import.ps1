@@ -68,8 +68,8 @@ Runs GPG keys import pipeline.
 function Main {
 
     Write-Host `
-        "The GPG OpenPGP keys import script has been launched."`
-        -ForegroundColor White
+        "The GPG OpenPGP keys import script has been launched." `
+        -ForegroundColor Blue
 
     try {
 

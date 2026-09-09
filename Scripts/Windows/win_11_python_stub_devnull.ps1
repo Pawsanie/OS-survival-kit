@@ -166,7 +166,7 @@ function Main {
 
     Write-Host `
         "Windows Python EXE stubs devnull script has been launched." `
-        -ForegroundColor White
+        -ForegroundColor Blue
 
     Write-Host `
         "Checking Python EXE availability for invocation." `

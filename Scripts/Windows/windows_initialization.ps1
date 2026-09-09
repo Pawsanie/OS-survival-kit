@@ -38,6 +38,10 @@ Disables telemetry dependent on registry policies.
 #>
 function Set-Telemetry-Registry-Policies {
 
+    Write-Host `
+        "Disabling telemetry registry policies."`
+        -ForegroundColor White
+
     New-Item `
         -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" `
         -Force `
@@ -59,6 +63,10 @@ Stops telemetry services.
 #>
 function Stop-Telemetry-Services {
 
+    Write-Host `
+        "Stoping telemetry services."`
+        -ForegroundColor White
+
     Stop-Service diagtrack `
         -Force `
         -ErrorAction SilentlyContinue
@@ -77,7 +85,11 @@ function Stop-Telemetry-Services {
 .SYNOPSIS
 Clears a significant portion of telemetry from the task list.
 #>
-function Clear-telemetry-Tasks {
+function Clear-Telemetry-Tasks {
+
+    Write-Host `
+        "Clearing telemetry Windows tasks."`
+        -ForegroundColor White
 
     foreach (
         $task in @(
@@ -105,9 +117,13 @@ function Clear-telemetry-Tasks {
 
 <#
 .SYNOPSIS
-Disables Reclame and News widgets.
+Disables Advertising and News widgets.
 #>
 function Set-Advertising-And-CloudContent-Registry-Policies {
+
+    Write-Host `
+        "Disableing Advertising and News widgets."`
+        -ForegroundColor White
 
     foreach (
         $path in @(
@@ -173,6 +189,10 @@ Turns off cloud dynamic wallpapers.
 #>
 function Set-Wallpaper-Spotlight-Registry-Policies {
 
+    Write-Host `
+        "Disableing the cloud dynamic Wallpapers."`
+        -ForegroundColor White
+
     foreach (
         $key in @(
             "DisableWindowsSpotlightOnLockScreen",
@@ -198,6 +218,15 @@ function Set-Wallpaper-Spotlight-Registry-Policies {
 Removes the feed from the Start Menu search.
 #>
 function Set-Windows-Search-Highlights-Registry-Policies {
+
+    Write-Host `
+        "Disableing the Start Menu search Feed."`
+        -ForegroundColor White
+
+    New-Item `
+        -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" `
+        -Force `
+        | Out-Null
 
     foreach (
         $key in @(
@@ -239,6 +268,10 @@ function Set-Windows-Search-Highlights-Registry-Policies {
 Removes unnecessary and reclame pre-installed applications.
 #>
 function Remove-Pre-installed-Apps {
+
+    Write-Host `
+        "Removing pre-installed applications:"`
+        -ForegroundColor White
 
     foreach (
         $app in @(
@@ -283,6 +316,10 @@ function Remove-Pre-installed-Apps {
         )
     ) {
 
+        Write-Host `
+        "Attempt to remove: $app"`
+        -ForegroundColor White
+
         Get-AppxPackage `
             -Name $app `
             -AllUsers `
@@ -308,6 +345,10 @@ Prevents the remote Xbox piece from being called every time the game is opened.
 #>
 function Disable-Gaming-Overlay {
 
+    Write-Host `
+        "Disableing the Microsoft Gaming Overlay."`
+        -ForegroundColor White
+
     New-Item `
         -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" `
         -Force `
@@ -323,6 +364,24 @@ function Disable-Gaming-Overlay {
 
 }
 
+
+<#
+.SYNOPSIS
+Apply changes that do not require a system restart.
+#>
+function Restart-Explorer-Process {
+
+    Write-Host `
+        "Attempting to restart the file Explorer process."`
+        -ForegroundColor White
+
+    Stop-Process `
+        -Name explorer `
+        -Force
+    Start-Process explorer
+
+}
+
 <#
 .SYNOPSIS
 Runs Windows initialization pipeline.
@@ -330,13 +389,13 @@ Runs Windows initialization pipeline.
 function Main {
 
     Write-Host `
-        "Post-installation Windows initialization script has been launched."`
-        -ForegroundColor White
+        "Post-installation Windows initialization script has been launched." `
+        -ForegroundColor Blue
 
     # Telemetry:
     Set-Telemetry-Registry-Policies
     Stop-Telemetry-Services
-    Clear-telemetry-Tasks
+    Clear-Telemetry-Tasks
 
     # Advertising and CloudContent:
     Set-Advertising-And-CloudContent-Registry-Policies
@@ -351,11 +410,8 @@ function Main {
     Remove-Pre-installed-Apps
     Disable-Gaming-Overlay
 
-    # Apply changes that do not require a system restart:
-    Stop-Process `
-        -Name explorer `
-        -Force
-    Start-Process explorer
+    # Apply changes:
+    Restart-Explorer-Process
 
     Write-Host `
         "Post-installation Windows initialization scenario completed." `

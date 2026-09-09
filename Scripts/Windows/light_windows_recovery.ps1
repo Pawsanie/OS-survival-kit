@@ -105,6 +105,10 @@ Runs light Windows recovery pipeline.
 #>
 function Main {
 
+    Write-Host `
+        "Light Windows recovery script has been launched." `
+        -ForegroundColor Blue
+
     try {
 
         Clear-Windows-Update-Cache `
@@ -120,6 +124,10 @@ function Main {
     }
 
     Start-Recovery-Trick
+
+    Write-Host `
+        "Light Windows recovery scenario completed." `
+        -ForegroundColor Blue
 
 }
 
