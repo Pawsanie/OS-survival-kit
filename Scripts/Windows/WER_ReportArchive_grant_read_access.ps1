@@ -22,6 +22,7 @@ if (
             '-NoProfile',
             '-ExecutionPolicy',
             'Bypass',
+            '-NoExit',
             '-File',
             $PSCommandPath
     )
@@ -35,7 +36,7 @@ Write-Host `
     -ForegroundColor Blue
 
 Get-ChildItem `
-    -LiteralPath "$env:ProgramFiles\Microsoft\Windows\WER\ReportArchive" `
+    -LiteralPath "$env:ProgramData\Microsoft\Windows\WER\ReportArchive" `
     -Force `
     -Directory `
     -ErrorAction SilentlyContinue `
