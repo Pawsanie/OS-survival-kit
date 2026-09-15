@@ -22,6 +22,7 @@ Contains information about requirements to execute scripts and how to check them
 * [Quick Start for Engineers](#Quick-Start-for-Engineers)
 
 ### Windows Scripts:
+* [DNS cache cleaning](#DNS-cache-cleaning)
 * [GPG Signature Management](#GPG-Signature-Management)
 * [Light Windows Recovery](#Light-Windows-Recovery)
 * [Windows WER ReportArchive read access problems](#Windows-WER-ReportArchive-read-access-problems)
@@ -126,6 +127,14 @@ However, if you see "**False**" instead, then you need to contact your administr
     ```
    
 ## Windows Administration:
+
+### DNS cache cleaning:
+
+The whole process is already automated in the script.<br>
+**./**:open_file_folder:Scripts<br>
+   └── :file_folder:Windows<br>
+            └── :page_facing_up:[DNS_cache_cleaning.ps1](Scripts/Windows/DNS_cache_cleaning.ps1)
+<br><br>
 
 ### GPG Signature Management:
 **OpenPGP** secret keys are used, for example, to sign commits for GitHub.<br>
