@@ -143,6 +143,9 @@ The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
             └── :page_facing_up:[DNS_cache_cleaning.ps1](Scripts/Windows/DNS_cache_cleaning.ps1)
+
+:warning:Please note that the issue sometimes lies in the browser's DNS cache.:warning:<br>
+In such cases, simply close the browser before running the commands listed above is usually sufficient.
 <br><br>
 
 ### GPG Signature Management:
