@@ -150,6 +150,10 @@ The following scripts have been written to automate this process:<br>
             ├── :page_facing_up:[git_gpg_activate.ps1](Scripts/Windows/git_gpg_activate.ps1)<br>
             ├── :page_facing_up:[gpg_export.ps1](Scripts/Windows/gpg_export.ps1)<br>
             └── :page_facing_up:[gpg_import.ps1](Scripts/Windows/gpg_import.ps1)
+
+:warning:Please note that the script's logic specifies a transfer to another drive in advance.:warning:<br>
+You may need to change the drive letter.<br>
+**D:** - by default.
 <br><br>
 
 ### Light Windows Recovery:
