@@ -129,6 +129,8 @@ However, if you see "**False**" instead, then you need to contact your administr
 ## Windows Administration:
 
 ### DNS cache cleaning:
+When working with the network in Windows, the operating system's DNS cache sometimes gets stuck.
+This makes it impossible to establish new connections to some or all website or services.
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
