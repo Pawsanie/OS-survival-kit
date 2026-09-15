@@ -129,8 +129,15 @@ However, if you see "**False**" instead, then you need to contact your administr
 ## Windows Administration:
 
 ### DNS cache cleaning:
-When working with the network in Windows, the operating system's DNS cache sometimes gets stuck.
+When working with the network in Windows, the operating system's DNS cache sometimes gets stuck.<br>
 This makes it impossible to establish new connections to some or all website or services.
+
+To solve this problem, it is sufficient to run three commands in sequence:
+```powershell
+ipconfig /flushdns
+ipconfig /release
+ipconfig /renew
+```
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
