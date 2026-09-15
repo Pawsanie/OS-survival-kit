@@ -7,6 +7,10 @@ Write-Host `
     "Windows DNS cache clearing script has been launched." `
     -ForegroundColor Blue
 
+Write-Host `
+    "Please note that before running this script, you should close the browsers where the problem occurs." `
+    -ForegroundColor Red
+
 foreach (
     $command in (
         [ordered]@{
