@@ -63,6 +63,7 @@ function Get-Files-Tree {
     Write-Host `
         "Attempting to collect paths to the contents of the 'Windows.old' directory.`n" `
         "Directory path: '$Path'" `
+        -Separator "" `
         -ForegroundColor Blue
 
     foreach (
@@ -104,6 +105,7 @@ function Get-Files-Tree {
              Write-Host `
                 "The path has been added to multithreaded processing queue.`n" `
                 "Item path: '$($Item.FullName)'" `
+                -Separator "" `
                 -ForegroundColor White
 
         }
@@ -112,6 +114,7 @@ function Get-Files-Tree {
             Write-Host `
                 "Failed to add path to multithreaded processing queue!`n" `
                 "Item path: '$($Item.FullName)'" `
+                -Separator "" `
                 -ForegroundColor Red
 
         }
@@ -518,6 +521,7 @@ function Main {
         Write-Host `
             "Unable to locate Windows.old!`n" `
             "Directory path: '$TargetPath'" `
+            -Separator "" `
             -ForegroundColor Blue
 
     }

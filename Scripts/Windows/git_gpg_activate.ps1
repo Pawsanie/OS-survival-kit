@@ -156,6 +156,7 @@ function Main {
         Write-Host `
         "The OpenPGP secret key ID is not hardcoded.`n" `
         "Attempting to get default OpenPGP secret key ID..." `
+        -Separator "" `
         -ForegroundColor Yellow
 
         try {
@@ -168,6 +169,7 @@ function Main {
             Write-Host `
                 "Unable to get default OpenPGP secret key ID.`n" `
                 "Script execution terminated!" `
+                -Separator "" `
                 -ForegroundColor Red
 
             return

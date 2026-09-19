@@ -111,8 +111,8 @@ function Get-Hardware-IDs {
         Write-Host `
             "Type: $($device.Class)`n" `
             "Name: $($device.FriendlyName)`n" `
-            "Class: $($device.Class)`n" `
             "Instance ID: $($device.InstanceId)" `
+            -Separator "" `
             -ForegroundColor White
 
         try {
@@ -143,7 +143,7 @@ function Get-Hardware-IDs {
         }
         catch {
 
-            Write-Warning `
+            Write-Host `
                 "Failed to retrieve hardware IDs: $($device.FriendlyName)" `
                 -ForegroundColor White
 
@@ -158,6 +158,7 @@ function Get-Hardware-IDs {
         Write-Host `
             "Failed to retrieve any hardware IDs!`n" `
             "Program execution has been suspended..." `
+            -Separator "" `
             -ForegroundColor Red
 
         exit 1
@@ -248,6 +249,7 @@ function Set-Registry-Policy {
     Write-Host `
         "Total Hardware IDs in the policy: $($allIds.Count)`n" `
         "Blocked by Hardware IDs: $($HardwareIDs.Count)" `
+        -Separator "" `
         -ForegroundColor Green
 
     # Updating Group Policy:
@@ -280,9 +282,15 @@ function Main {
     New-Registry-Policy
 
     Set-Registry-Policy `
-        -ExistingHardwareIDs Get-Existing-Hardware-IDs `
-        -HardwareIDs Get-Hardware-IDs `
-            -Devices Get-Devices
+        -ExistingHardwareIDs (
+            Get-Existing-Hardware-IDs
+        ) `
+        -HardwareIDs (
+            Get-Hardware-IDs `
+                -Devices (
+                    Get-Devices
+                )
+        )
 
     Update-Registry-Policy
 
