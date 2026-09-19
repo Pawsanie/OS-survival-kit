@@ -41,8 +41,8 @@ Creates a tree for the install devices restrictions Registry policy if it does n
 function New-Registry-Policy {
 
     Write-Host `
-        "Creating a restrictions Registry policy tree for installed devices." `
-        -ForegroundColor White
+        "Creating a restrictions Registry policy tree for installed devices..." `
+        -ForegroundColor Cyan
 
     New-Item `
         -Path $policyPath `
@@ -60,6 +60,10 @@ Microsoft.Management.Infrastructure.CimInstance Processor or Display objects arr
 #>
 function Get-Devices {
 
+    Write-Host `
+        "Geting a list of CPU|GPU devices..." `
+        -ForegroundColor Cyan
+
     $devices = Get-PnpDevice `
         -PresentOnly `
         | Where-Object {
@@ -75,6 +79,7 @@ function Get-Devices {
         Write-Host `
             "Get-PnpDevice failed to gather CPU and GPU information!`n" `
             "Program execution has been suspended..." `
+            -Separator "" `
             -ForegroundColor Red
 
         exit 1
@@ -103,6 +108,10 @@ function Get-Hardware-IDs {
     param (
         [object[]]$Devices
     )
+
+    Write-Host `
+        "Parsing Hardware IDs from devices..." `
+        -ForegroundColor Cyan
 
     $hardwareIds = @()
 
@@ -184,6 +193,10 @@ Hardware IDs array.
 #>
 function Get-Existing-Hardware-IDs {
 
+    Write-Host `
+        "Reads the existing list of devices Ids whose driver updates are prohibited in the Registry..." `
+        -ForegroundColor Cyan
+
     try {
 
         return Get-ItemProperty `
@@ -252,8 +265,6 @@ function Set-Registry-Policy {
         -Separator "" `
         -ForegroundColor Green
 
-    # Updating Group Policy:
-
 }
 
 <#
@@ -261,6 +272,10 @@ function Set-Registry-Policy {
 Apply Registry policies.
 #>
 function Update-Registry-Policy {
+
+    Write-Host `
+        "Applying Registry policies..." `
+        -ForegroundColor Cyan
 
     gpupdate.exe `
         /target:computer `
