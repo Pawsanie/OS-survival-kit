@@ -25,6 +25,7 @@ Contains information about requirements to execute scripts and how to check them
 * [DNS cache cleaning](#DNS-cache-cleaning)
 * [GPG Signature Management](#GPG-Signature-Management)
 * [Light Windows Recovery](#Light-Windows-Recovery)
+* [Shutdown CPU|GPU drivers destroyer](#Shutdown-CPU|GPU-drivers-destroyer)
 * [Windows WER ReportArchive read access problems](#Windows-WER-ReportArchive-read-access-problems)
 * [Windows 11 Python cannot be invoked from CMD or PowerShell](#Windows-11-Python-cannot-be-invoked-from-CMD-or-PowerShell)
 * [Post-installation Windows initialization](#Post-installation-Windows-initialization)
@@ -179,6 +180,24 @@ The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
             └── :page_facing_up:[light_windows_recovery.ps1](Scripts/Windows/light_windows_recovery.ps1)
+<br><br>
+
+### Shutdown CPU|GPU drivers destroyer:
+In some cases, especially with older devices,<br>
+**Windows Update** can replace up-to-date **drivers** that you installed manually or through the device manufacturer's utilities.
+
+The problem is that this could lead to a cascading operating system failure.<br>
+This is most often due to an exception occurring within the graphics driver DLL.<br>
+For example, when Windows replaces a driver after a crash with one it considers more suitable.
+
+After a clean system installation,<br>
+one possible solution is to explicitly disable automatic driver updates by the OS for specific devices.<br>
+This can help in cases where Windows Update is replacing working drivers with problematic ones.
+
+The process for the CPU and GPU is already automated in the script.<br>
+**./**:open_file_folder:Scripts<br>
+   └── :file_folder:Windows<br>
+            └── :page_facing_up:[shutdown_windows_update_cpu_gpu_driver_destroyer.ps1](Scripts/Windows/light_windows_recovery.ps1)
 <br><br>
 
 ### Windows WER ReportArchive read access problems:
