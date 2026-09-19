@@ -246,7 +246,7 @@ function Set-Registry-Policy {
         | Out-Null
 
     Write-Host `
-        "Total Hardware IDs in the policy: $($allIds.Count)" `
+        "Total Hardware IDs in the policy: $($allIds.Count)`n" `
         "Blocked by Hardware IDs: $($HardwareIDs.Count)" `
         -ForegroundColor Green
 
