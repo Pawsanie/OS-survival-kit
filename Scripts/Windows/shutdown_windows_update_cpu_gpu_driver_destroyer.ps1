@@ -20,8 +20,7 @@ if (
         -Verb RunAs `
         -ArgumentList @(
             '-NoProfile',
-            '-ExecutionPolicy',
-            'Bypass',
+            '-ExecutionPolicy Bypass',
             '-NoExit',
             '-File',
             $PSCommandPath
