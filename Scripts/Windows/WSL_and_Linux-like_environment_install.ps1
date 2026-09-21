@@ -173,11 +173,68 @@ function Main {
 
     # WSL installation:
     if (
-        -not (
+        (
             Get-Command wsl.exe `
                 -ErrorAction SilentlyContinue
+        ) `
+        -and (
+            $null -eq (
+                Get-ScheduledTask `
+                    -TaskName $TaskName `
+                    -ErrorAction SilentlyContinue
+            )
         )
     ) {
+
+        if (
+            $Distribution -in (
+                wsl `
+                    --list `
+                    --quiet
+            )
+        ) {
+
+            Write-Host `
+                "WSL and Linux-like environment already installed and configured.`n" `
+                "Nothing to do." `
+                -Separator "" `
+                -ForegroundColor Green
+
+        }
+        else {
+
+            Write-Host `
+                "Configuring WSL..." `
+                -ForegroundColor Cyan
+
+            wsl `
+                --update
+            wsl `
+                --set-default-version 2
+
+            Write-Host `
+                "Installing Linux-like environment..." `
+                -ForegroundColor Cyan
+
+            wsl `
+                --install `
+                -d $Distribution `
+                --no-launch
+
+        }
+
+        Write-Host `
+            "Install and configure WSL and Linux-like environment pipeline scenario completed." `
+            -ForegroundColor Blue
+
+        exit 0
+
+    }
+    else {
+
+        Write-Host `
+            "Installation of WSL..." `
+            -ForegroundColor Cyan
 
         wsl `
             --install `
@@ -192,7 +249,7 @@ function Main {
                 -TaskName $TaskName `
                 -ErrorAction SilentlyContinue
         ) `
-        -or (
+        -and (
             $Distribution -notin (
                 wsl `
                     --list `
@@ -200,6 +257,10 @@ function Main {
             )
         )
     ) {
+
+        Write-Host `
+            "Setting a Task for the Task scheduler...." `
+            -ForegroundColor Cyan
 
         Register-Task {
 
@@ -226,6 +287,14 @@ function Main {
                 --no-launch
 
             Write-Host `
+                "Removing a Task from the Task Scheduler..." `
+                -ForegroundColor Cyan
+
+            Unregister-ScheduledTask `
+                -TaskName $TaskName `
+                -Confirm:$false
+
+            Write-Host `
                 "Install and configure WSL and Linux-like environment pipeline scenario completed." `
                 -ForegroundColor Blue
 
@@ -234,6 +303,21 @@ function Main {
         Invoke-Restart
 
     }
+    else {
+
+        Write-Host `
+            "The restart task has already been scheduled.`n" `
+            "Nothing to do." `
+            -Separator "" `
+            -ForegroundColor Green
+
+        Invoke-Restart
+
+    }
+
+    Write-Host `
+        "Install and configure WSL and Linux-like environment pipeline scenario completed." `
+        -ForegroundColor Blue
 
 }
 
