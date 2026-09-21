@@ -329,6 +329,9 @@ The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
             └── :page_facing_up:[WSL_and_Linux-like_environment_install.ps1](Scripts/Windows/WSL_and_Linux-like_environment_install.ps1)
+
+:warning:Please note that the script's logic specifies an installation of a specific Unix-like distribution.:warning:<br>
+By default, it is **Ubuntu**, but you can replace it later.
 <br><br>
 
 
