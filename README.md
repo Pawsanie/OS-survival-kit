@@ -25,7 +25,7 @@ Contains information about requirements to execute scripts and how to check them
 * [DNS cache cleaning](#DNS-cache-cleaning)
 * [GPG Signature Management](#GPG-Signature-Management)
 * [Light Windows Recovery](#Light-Windows-Recovery)
-* [Shutdown CPU|GPU drivers destroyer](#Shutdown-CPU|GPU-drivers-destroyer)
+* [Shutdown CPU/GPU drivers destroyer](#Shutdown-CPU-GPU-drivers-destroyer)
 * [Windows WER ReportArchive read access problems](#Windows-WER-ReportArchive-read-access-problems)
 * [Windows 11 Python cannot be invoked from CMD or PowerShell](#Windows-11-Python-cannot-be-invoked-from-CMD-or-PowerShell)
 * [Post-installation Windows initialization](#Post-installation-Windows-initialization)
@@ -183,7 +183,7 @@ The whole process is already automated in the script.<br>
             └── :page_facing_up:[light_windows_recovery.ps1](Scripts/Windows/light_windows_recovery.ps1)
 <br><br>
 
-### Shutdown CPU|GPU drivers destroyer:
+### Shutdown CPU/GPU drivers destroyer:
 In some cases, especially with older devices,<br>
 **Windows Update** can replace up-to-date **drivers** that you installed manually or through the device manufacturer's utilities.
 
