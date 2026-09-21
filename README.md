@@ -339,7 +339,7 @@ In general, deploying a Unix-like environment requires several steps:
     ```powershell
     wsl --list --online
     ```
-    Install the required distribution.
+    Install the desired distribution.
     ```powershell
     wsl --install -d <Distribution>
     ```
