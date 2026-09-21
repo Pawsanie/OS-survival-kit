@@ -198,7 +198,7 @@ This can help in cases where Windows Update is replacing working drivers with pr
 The process for the CPU and GPU is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
-            └── :page_facing_up:[shutdown_windows_update_cpu_gpu_driver_destroyer.ps1](Scripts/Windows/light_windows_recovery.ps1)
+            └── :page_facing_up:[shutdown_windows_update_cpu_gpu_driver_destroyer.ps1](Scripts/Windows/shutdown_windows_update_cpu_gpu_driver_destroyer.ps1)
 <br><br>
 
 ### Windows WER ReportArchive read access problems:
@@ -328,7 +328,7 @@ The whole process is already automated in the script.<br>
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
-            └── :page_facing_up:[WSL_and_Linux-like_environment_install.ps1](Scripts/Windows/windows_old_devnull.ps1)
+            └── :page_facing_up:[WSL_and_Linux-like_environment_install.ps1](Scripts/Windows/WSL_and_Linux-like_environment_install.ps1)
 <br><br>
 
 
