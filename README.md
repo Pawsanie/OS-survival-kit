@@ -352,7 +352,8 @@ The whole process is already automated in the script.<br>
             └── :page_facing_up:[WSL_and_Linux-like_environment_install.ps1](Scripts/Windows/WSL_and_Linux-like_environment_install.ps1)
 
 :warning:Please note that the script's logic installs a specific Unix-like distribution.:warning:<br>
-By default, it is **Ubuntu**, but you can replace it later.
+By default, it is **Ubuntu**, but you can replace it later.<br>
+The installation of Docker and Kubernetes is not automated due to the wide range of available configuration options.
 <br><br>
 
 
