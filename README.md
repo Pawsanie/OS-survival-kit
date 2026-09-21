@@ -30,6 +30,7 @@ Contains information about requirements to execute scripts and how to check them
 * [Windows 11 Python cannot be invoked from CMD or PowerShell](#Windows-11-Python-cannot-be-invoked-from-CMD-or-PowerShell)
 * [Post-installation Windows initialization](#Post-installation-Windows-initialization)
 * [Undeletable Windows.old folder](#Undeletable-Windowsold-folder)
+* [Linux-like environment install](#Linux-like-environment-install)
 
 ___
 <br>
@@ -321,6 +322,13 @@ The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
             └── :page_facing_up:[windows_old_devnull.ps1](Scripts/Windows/windows_old_devnull.ps1)
+<br><br>
+
+### Linux-like environment install:
+The whole process is already automated in the script.<br>
+**./**:open_file_folder:Scripts<br>
+   └── :file_folder:Windows<br>
+            └── :page_facing_up:[WSL_and_Linux-like_environment_install.ps1](Scripts/Windows/windows_old_devnull.ps1)
 <br><br>
 
 
