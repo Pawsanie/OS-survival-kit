@@ -325,6 +325,27 @@ The whole process is already automated in the script.<br>
 <br><br>
 
 ### Linux-like environment install:
+In general, deploying a Unix-like environment requires several steps:
+1) You need to **enable hardware virtualization** support in your **UEFI** or **BIOS**.<br>
+    :warning:This step cannot be automated.:warning:
+2) To set up a **Unix-like** environment, **Docker**, or **Kubernetes** on **Windows**, you first need to install **WSL**.
+3) **Restart** your computer before proceeding to the next steps.
+4) Update **WSL** and switch to a newer version.
+    ```powershell
+    wsl --update
+    wsl --set-default-version 2
+    ```
+5) Check the available distributions online if you don't know the name you need.
+    ```powershell
+    wsl --list --online
+    ```
+    Install the required distribution.
+    ```powershell
+    wsl --install -d <Distribution>
+    ```
+6) Additionally, install **Docker** and/or **Kubernetes** using your preferred method, if necessary.<br>
+   For example, you can install **Docker Desktop** from the official **Microsoft Store** and enable Kubernetes in it.
+
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
