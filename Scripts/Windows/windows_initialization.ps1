@@ -132,9 +132,9 @@ function Set-Advertising-And-CloudContent-Registry-Policies {
     ) {
 
         New-Item `
-        -Path $path `
-        -Force `
-        | Out-Null
+            -Path $path `
+            -Force `
+            | Out-Null
 
     }
 

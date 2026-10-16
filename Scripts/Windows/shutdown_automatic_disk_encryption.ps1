@@ -36,12 +36,11 @@ Turns off automatic disk encryption.
 #>
 function Set-Windows-Automatic-Disk-Encryption-Policies {
 
-    reg `
-        add "HKLM\SYSTEM\CurrentControlSet\Control\BitLocker" `
-        /v PreventDeviceEncryption `
-        /t REG_DWORD `
-        /d 1 `
-        /f
+    Set-ItemProperty `
+        -Path "HKLM:\SYSTEM\CurrentControlSet\Control\BitLocker" `
+        -Name "PreventDeviceEncryption" `
+        -Type DWord `
+        -Value 1
 
 }
 
@@ -64,9 +63,106 @@ function Invoke-Disk-Decryption {
 
 <#
 .SYNOPSIS
+Get the decrytional status for outputting progress to STDOUT.
+#>
+function Get-Decrytional-Status {
+
+    $volumes = @(
+        Get-BitLockerVolume `
+            | Where-Object VolumeStatus -ne 'FullyDecrypted' `
+            | Select-Object `
+                -ExpandProperty MountPoint
+    )
+
+    while ($true) {
+
+        $statuses = @(
+            Get-BitLockerVolume `
+                | Where-Object {
+                    $_.MountPoint -in $volumes -and
+                    $_.VolumeStatus -ne 'FullyDecrypted'
+                }
+        )
+
+        if ($statuses.Count -eq 0) {
+
+            break
+
+        }
+
+        foreach ($volume in $statuses) {
+
+            $mountPoint = $volume.MountPoint
+            $percent = 100 - $volume.EncryptionPercentage
+            $id = [array]::IndexOf(
+                    $volumes, $mountPoint
+            ) + 1
+
+            Write-Progress `
+                -Id $id `
+                -Activity "Volume $mountPoint" `
+                -Status "$percent% deciphered..." `
+                -PercentComplete $percent
+
+        }
+
+        Start-Sleep `
+            -Seconds 5
+
+    }
+
+}
+
+<#
+.SYNOPSIS
 Runs Windows shutdown automatic disk encryption pipeline.
 #>
-function Main {}
+function Main {
+
+    Write-Host `
+        "Windows shutdown automatic disk encryption script has been launched." `
+        -ForegroundColor Blue
+
+    try {
+
+        # Run decrytional pipline:
+        Write-Host `
+            "Prohibiting automatic disk encryption..." `
+            -ForegroundColor White
+
+        Set-Windows-Automatic-Disk-Encryption-Policies
+
+        Write-Host `
+            "Decrypting disks..." `
+            -ForegroundColor White
+
+        Invoke-Disk-Decryption
+
+        # Awaiting decrytional:
+        Get-Decrytional-Status
+
+    }
+    catch {
+
+        Write-Host `
+            "A critical error occurred during pipeline execution...`n" `
+            "Execution has been aborted!" `
+            -Separator "" `
+            -ForegroundColor Red
+
+        return
+
+    }
+
+    Write-Host `
+        "Decryption complete." `
+        -ForegroundColor Green
+
+    Write-Host `
+        "Windows shutdown automatic disk encryption scenario completed." `
+        -ForegroundColor Blue
+
+}
 
 # Entry point:
 Main
