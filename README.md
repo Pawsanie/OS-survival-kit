@@ -25,6 +25,7 @@ Contains information about requirements to execute scripts and how to check them
 * [DNS cache cleaning](#DNS-cache-cleaning)
 * [GPG Signature Management](#GPG-Signature-Management)
 * [Light Windows Recovery](#Light-Windows-Recovery)
+* [Shutdown automatic disk encryption](#Shutdown-automatic-disk-encryption)
 * [Shutdown CPU or GPU drivers destroyer](#Shutdown-CPU-or-GPU-drivers-destroyer)
 * [Windows WER ReportArchive read access problems](#Windows-WER-ReportArchive-read-access-problems)
 * [Windows 11 Python cannot be invoked from CMD or PowerShell](#Windows-11-Python-cannot-be-invoked-from-CMD-or-PowerShell)
@@ -181,6 +182,13 @@ The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
    └── :file_folder:Windows<br>
             └── :page_facing_up:[light_windows_recovery.ps1](Scripts/Windows/light_windows_recovery.ps1)
+<br><br>
+
+### Shutdown automatic disk encryption:
+The whole process is already automated in the script.<br>
+**./**:open_file_folder:Scripts<br>
+   └── :file_folder:Windows<br>
+            └── :page_facing_up:[shutdown_automatic_disk_encryption.ps1](Scripts/Windows/shutdown_automatic_disk_encryption.ps1)
 <br><br>
 
 ### Shutdown CPU or GPU drivers destroyer:
