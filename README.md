@@ -189,9 +189,9 @@ On some devices running **Windows**, disk encryption using **BitLocker** is enab
 This is not a bad data protection mechanism.<br>
 Problems may arise because, due to the specific nature of **automatic encryption**, fail to provide effective protection.
 
-This happens because **BitLocker** encrypts the data on the disk using a "**Full Volume Encryption Key (FVEK)**".<br>
-It then encrypts the **FVEK** using a "**Volume Master Key (VMK)**".<br>
-In this setup, the **VMK** must be protected by a "**Trusted Platform Module (TPM)**", for instance, using a **PIN**.<br>
+This happens because **BitLocker** encrypts the data on the disk using a **Full Volume Encryption Key (FVEK)**.<br>
+It then encrypts the **FVEK** using a **Volume Master Key (VMK)**.<br>
+In this setup, the **VMK** must be protected by a **Trusted Platform Module (TPM)**, for instance, using a **PIN**.<br>
 However, for this to be configured, a recovery key must be created; this key is then uploaded to the Microsoft **Cloud**<br>
 and linked to your user account.<br>
 For corporate accounts, recovery keys are managed through one of two systems: **Active Directory Domain Services** or **Microsoft Entra ID**.
@@ -205,6 +205,7 @@ And despite gaining no meaningful security benefits, your device may suffer seve
 2) **BitLocker** may also reduce file read and write performance,<br>
    due to the additional process of encrypting and decrypting data blocks.<br>
    As a rule, the difference at any given moment isn’t large either, but it does exist.
+3) 
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
