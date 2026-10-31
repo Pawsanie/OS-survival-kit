@@ -211,7 +211,7 @@ And despite gaining no meaningful security benefits, your device may suffer seve
    The probability of this occurring is extremely low, but it is not zero.
 
 There are several ways to fix this.<br>
-If you prefer to keep using a local account, you have two options::<br>
+If you prefer to keep using a local account, you have two options:<br>
 either enable BitLocker manually or disable automatic encryption.<br>
 The second option will be easier for users who are not technically savvy.
 
