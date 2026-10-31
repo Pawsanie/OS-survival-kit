@@ -212,8 +212,7 @@ And despite gaining no meaningful security benefits, your device may suffer seve
 
 There are several ways to fix this.<br>
 If you prefer not to link your account to an online account which can you have two options:<br>
-either enable BitLocker manually<br>
-or disable automatic encryption.<br>
+either enable BitLocker manually or disable automatic encryption.<br>
 The second option will be easier for users who are not technically savvy.
 
 The whole process is already automated in the script.<br>
