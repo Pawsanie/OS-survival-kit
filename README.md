@@ -204,15 +204,17 @@ And despite gaining no meaningful security benefits, your device may suffer seve
 1) **BitLocker** can cause a slight amount of additional wear on the disk.
 2) **BitLocker** may also reduce file read and write performance,<br>
    due to the additional process of encrypting and decrypting data blocks.<br>
-   As a rule, the difference at any given moment isn’t large either, but it does exist.
-3) By default, **BitLocker** creates three instances of metadata, which may contain a "Clear Key." 
-   Theoretically, it is possible for all instances of the Clear Key to become corrupted.
-   In such a scenario, you could lose all the data on the drive.
+   As a rule, the difference at any given moment isn’t large either, but it does exist.<br>
+3) By default, **BitLocker** creates three instances of metadata, which may contain a "Clear Key." <br>
+   Theoretically, it is possible for all instances of the Clear Key to become corrupted.<br>
+   In such a scenario, you could lose all the data on the drive.<br>
    The probability of this occurring is extremely low, but it is not zero.
 
-There are several ways to fix this.
-If you prefer not to link your account to an online account—which can sometimes be a bit simpler for users who are less technically
-savvy—you have two options: either enable BitLocker manually or disable automatic encryption.
+There are several ways to fix this.<br>
+If you prefer not to link your account to an online account which can you have two options:<br>
+either enable BitLocker manually<br>
+or disable automatic encryption.<br>
+The second option will be easier for users who are not technically savvy.
 
 The whole process is already automated in the script.<br>
 **./**:open_file_folder:Scripts<br>
